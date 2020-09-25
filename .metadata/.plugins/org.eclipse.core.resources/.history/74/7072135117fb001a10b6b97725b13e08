@@ -1,0 +1,46 @@
+package com.myboard.service;
+
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.spring.service.MemberServiceImpl;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.myboard.dao.MemberDAO;
+import com.myboard.dto.MemberDTO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+	
+	@Resource
+	private MemberDAO mdao;
+
+	@Transactional
+	@Override
+	public Map<String,Object> insert(MemberDTO mdto) throws Exception {
+		String msg = null;
+		//result : 0(회원가입 성공),1(회원가입 실패)
+		int result = -1;
+		
+		//아이디 중복 체크
+		MemberDTO rdto = dao.selectOne(mdto.getUserid());
+	}
+
+	@Transactional
+	@Override
+	public void update(MemberDTO mdto) throws Exception {
+		mdao.update(mdto);
+	}
+
+	@Transactional
+	@Override
+	public void delete(String userid) throws Exception {
+		mdao.delete(userid);
+	}
+
+}

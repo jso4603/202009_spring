@@ -1,0 +1,21 @@
+package com.myboard.dao;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import com.myboard.dto.MemberDTO;
+
+@Repository
+public class MemberDAOImpl implements MemberDAO {
+	
+	@Resource
+	private SqlSession session;
+
+	@Override
+	public void insert(MemberDTO mdto) throws Exception {
+		session.insert("memberMapper.insert",mdto);
+	}
+
+}

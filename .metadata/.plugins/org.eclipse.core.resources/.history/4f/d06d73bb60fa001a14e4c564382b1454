@@ -1,0 +1,5 @@
+package com.myboard.dto;
+
+public class MemberDTO {
+
+}

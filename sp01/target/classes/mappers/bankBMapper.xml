@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bankBMapper">
+  <insert id="insert" parameterType="BankDTO">
+  	INSERT INTO bankb VALUES(
+	(SELECT NVL(max(seq)+1,1) FROM bankb),#{input},#{output})
+  </insert>
+</mapper>

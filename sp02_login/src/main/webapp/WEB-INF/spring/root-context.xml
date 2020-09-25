@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 서블릿과 관련되지 않은 설정들 -->	
+	<!-- db연결 설정 등 -->
+	
+	<!-- 데이터 소스 객체 만들기  -->
+	<!-- bean : 객체를 스프링 프레임워크가 만들어 주는 것  -->
+	<bean id="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:49161:xe"/>
+		<property name="username" value="hr"/>
+		<property name="password" value="hr"/>
+	</bean>
+	
+	<!-- mybatis-spring라이브러리 필요  -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatisConfig.xml"/>
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
+	</bean>
+	
+	<!-- 마이바티스 세션 생성  -->
+	<!-- 생성자에 factory를 넣어준다.  -->
+	<!-- template를 이용하면 객체를 관리 해준다.  -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 암호화를 위한 bean -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<!-- 솔트 값을 부여  -->
+		<constructor-arg name="strength" value="5"/>
+	</bean>
+		
+</beans>

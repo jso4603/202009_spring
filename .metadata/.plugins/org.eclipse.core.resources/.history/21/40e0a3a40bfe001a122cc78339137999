@@ -1,0 +1,19 @@
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>콜백</title>
+</head>
+<body>
+	<h2>콜백(토큰값 받기)</h2>
+	<!-- 토큰 : 정보를 요청할 수 있는 값  -->
+	${code} <br>
+	${state} <br>
+</body>
+</html>

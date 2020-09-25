@@ -1,0 +1,20 @@
+package org.spring.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/login")
+public class NaverLoginController {
+	
+	// 네이버로그인 인증코드 요청
+	@RequestMapping("/naverLogin")
+	public String naverLogin() {
+		return "15_naverLogin/01_naverlogin";
+	}
+	
+	@RequestMapping("/callback")
+	public String callback() {
+		return "15_naverLogin/01_naverlogin";
+	}
+}

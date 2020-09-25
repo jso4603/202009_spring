@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;member&apos;&#x0A;- Original project: &apos;sp02_login&apos;&#x0A;- Destination element: &apos;member&apos;&#x0A;- Original elements:&#x0A;     checkPW.jsp&#x0A;     deletePW.jsp&#x0A;     changePW.jsp" description="Copy files" element1="src/main/webapp/WEB-INF/views/Member/checkPW.jsp" element2="src/main/webapp/WEB-INF/views/Member/deletePW.jsp" element3="src/main/webapp/WEB-INF/views/Member/changePW.jsp" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1600665812556" target="/sp03_board_mysql/src/main/webapp/WEB-INF/views/member" units="0" version="1.0"/>
+</session>

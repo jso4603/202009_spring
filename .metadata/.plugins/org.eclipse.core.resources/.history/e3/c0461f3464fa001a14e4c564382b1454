@@ -1,0 +1,16 @@
+package com.myboard.service;
+
+import org.springframework.stereotype.Service;
+
+import com.myboard.dto.MemberDTO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+
+	@Override
+	public void insert(MemberDTO mdto) throws Exception {
+		
+		
+	}
+
+}

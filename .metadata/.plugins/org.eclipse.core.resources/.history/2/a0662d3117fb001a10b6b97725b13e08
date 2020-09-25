@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<!-- 회원 가입  -->
+	<insert id="insert">
+		INSERT INTO member(userid,passwd,email,name,zipcode,addr1,addr2,filename) 
+		VALUES(#{userid},#{passwd},#{email},#{name},#{zipcode},#{addr1},#{addr2},#{filename})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM member
+		WHERE userid = #{userid}
+	</delete>
+	
+	<update id="update">
+		UPDATE member
+		SET
+			email = #{email},
+		    name = #{name},
+		    zipcode = #{zipcode},
+		    addr1 = #{addr1},
+		    addr2 = #{addr2},
+		    filename = #{filename}
+		WHERE userid = #{userid}
+	</update>
+	
+	<!-- 아이디 이용 한건 조회  -->
+	<select id="selectOne" resultType="MemberDTO">
+		SELECT * FROM member
+		WHERE userid = #{userid}
+	</select>
+</mapper>

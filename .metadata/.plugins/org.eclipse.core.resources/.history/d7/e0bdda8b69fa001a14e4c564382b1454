@@ -1,0 +1,24 @@
+package com.myboard.service;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.myboard.dao.MemberDAO;
+import com.myboard.dto.MemberDTO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+	
+	@Resource
+	private MemberDAO mdao;
+
+	@Transactional
+	@Override
+	public void insert(MemberDTO mdto) throws Exception {
+		mdao.insert(mdto);
+		
+	}
+
+}

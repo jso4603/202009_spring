@@ -3,8 +3,10 @@ package com.myboard.controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboard.dto.MemberDTO;
 import com.myboard.service.MemberService;
+import com.myboard.service.NaverLoginService;
 
 @Controller
 @RequestMapping("/member")
@@ -27,9 +30,33 @@ public class MemberController {
 	@Resource
 	private MemberService mservice;
 	
+	@Resource
+	private NaverLoginService nservice;
+	
 	// 회원가입 폼으로 이동
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() throws Exception {
+	public String join(HttpServletRequest request, HttpSession session, Model model) throws Exception {
+		Map<String,String> map = nservice.getLoginUrl();
+
+		session.setAttribute("state", map.get("state"));
+		model.addAttribute("apiURL",map.get("apiURL"));
+		return "member/join";
+	}
+	
+	// 네이버 로그인 인증코드 콜백 매핑
+	// code : 인증코드, state : 세션에 저장 된 값(클라이언트인증위함)
+	@RequestMapping("/callback")
+	public String callback(String code,String state,Model model,HttpSession session) throws Exception {
+		// 세션의 state값과 넘겨받은 state값 일치
+		String saveState = (String)session.getAttribute("state");
+		if(saveState.equals(state)) {
+			Map<String, String> resultMap = nservice.getUserInfo(code,state); // 개인 정보를 요청할 수 있는 토큰값 요청
+			model.addAttribute("resultMap",resultMap);
+		} else {
+			System.out.println("인증에러");
+		}
+		
+		
 		return "member/join";
 	}
 	
@@ -45,33 +72,6 @@ public class MemberController {
 		if((int)map.get("result") == 0) return "redirect:/member/login";
 		// 회원가입 실패
 		return "redirect:/member/join";
-	}
-	
-	// 로그인 폼으로 이동
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "member/login";
-	}
-	
-	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(String userid, String passwd,
-			RedirectAttributes redirectAttributes,
-			HttpSession httpSession) throws Exception {
-
-		Map<String, Object> map = mservice.loginCheck(userid,passwd);
-		redirectAttributes.addFlashAttribute("msg",map.get("msg"));
-		redirectAttributes.addFlashAttribute("userid",userid);
-
-		// 로그인 성공한 경우
-		if((int)map.get("result") == 0) {
-			httpSession.setAttribute("userid", userid);
-			httpSession.setMaxInactiveInterval(60*60);
-			return "redirect:/board/list";
-		} 
-		
-		// 로그인 실패
-		return "redirect:/member/login";
 	}
 	
 	// 마이페이지 폼으로 이동

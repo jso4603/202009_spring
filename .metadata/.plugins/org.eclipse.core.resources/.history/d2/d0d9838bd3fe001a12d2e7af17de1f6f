@@ -1,0 +1,13 @@
+package com.myboard.dao;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class LoginDAOImpl implements LoginDAO {
+	@Resource
+	private SqlSession session;
+
+}

@@ -1,0 +1,203 @@
+package org.spring.sample;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.spring.dto.MemberDTO;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		// /WEB-INF/views/home.jsp
+		return "home";
+	}
+	
+	//01_voidTest.jsp 호출
+	@RequestMapping(value = "01_voidTest")
+	public void voidMapping() {
+		logger.info("void메소드 호출");
+	}
+	
+	//02_stringTest.jsp 호출
+	@RequestMapping("stringTest")
+	public String stringMapping() {
+		logger.info("string 메소드 호출");
+		//servlet-context.xml에 prefix, suffix 정의
+		/* /WEB-INF/views/02_stringTest.jsp */
+		return "02_stringTest";
+	}
+	
+	//03_paramTest.jsp 호출
+	@RequestMapping("paramTest")
+	public String paramTest(@RequestParam("nicName") String name, 
+				@RequestParam(defaultValue = "20") int age , Model model) {
+		logger.info("name:" + name);
+		logger.info("age:" + age);
+		model.addAttribute("nicName", name);
+		model.addAttribute("age", age);
+		return "03_paramTest";
+	}
+	
+	//실습)login테스트
+	@RequestMapping("login")
+	public String loginTest() {
+		return "03_Test/login";
+	}
+	@RequestMapping("main")
+	public String main(@RequestParam String userid, 
+				@RequestParam String passwd, Model model) {
+		model.addAttribute("userid", userid);
+		model.addAttribute("passwd", passwd);
+		return "03_Test/main";
+	}
+	
+	//04_ModelTest.jsp
+	//파라메터를 view까지 전달
+	@RequestMapping("04_ModelTest")
+	public void modelTest(@ModelAttribute("userid") String userid, 
+			@ModelAttribute("passwd") String passwd) {
+		logger.info("userid:" + userid);
+		logger.info("passwd:" + passwd);
+	}
+	
+	//05_DtoTest.jsp호출
+	/* /WEB-INF/views/05_DtoTest.jsp */
+	@RequestMapping("05_DtoTest")
+	public void dtoTest() {}
+	
+	//dto전달받아서 05_DtoTest.jsp호출
+	@RequestMapping("dtoTest")
+	public String dtoTest(@ModelAttribute("dto") MemberDTO dto) {
+		logger.info(dto.toString() );
+		return "05_DtoTest";
+	}
+	//맵으로 전달 받기
+	@RequestMapping("dtoTest_map")
+	public String dtoTest(@RequestParam HashMap<String,String> map, Model model) {
+		logger.info(map.toString() );
+		model.addAttribute("map", map);
+		return "05_DtoTest";
+	}
+	
+	//리다이렉트 테스트
+	@RequestMapping("redirectTest")
+	public String redirectTest() {
+		logger.info("리다이렉트 테스트");
+		return "redirect:06_redirect";
+	}
+	@RequestMapping("06_redirect")
+	public void redirect() {}
+	
+	//실습
+	//로그인 성공하면 메인 폼으로 가기 (redirect)
+	//아니면 로그인 폼으로 이동 (forward)
+	
+	/* /WEB-INF/views/06_test/login.jsp */
+	@RequestMapping("06_Test/login")
+	public void redirctLogin() {}
+	
+	//@ModelAttribute : view까지 데이터 전달
+	@RequestMapping("06_Test/main")
+	public void redirctMain(@ModelAttribute("userid") String userid,
+			@ModelAttribute("passwd") String passwd, 
+			@ModelAttribute("msg") String msg ) {
+	}
+	
+	@RequestMapping("loginCheck")
+	public String loginCheck(String userid,String passwd, 
+				RedirectAttributes rdAttr , HttpSession session) {
+		String myid = "java";
+		String mypw = "1111";
+		logger.info(userid + " " + passwd);
+		if (userid.equals(myid) && passwd.equals(mypw) ) {
+			//세션에 userid 저장
+			session.setAttribute("userid", userid);
+			session.setMaxInactiveInterval(60*10); //10분
+			
+			//리다이렉트 속성값으로 값 전달
+			rdAttr.addAttribute("userid", userid);
+			rdAttr.addAttribute("passwd", passwd);
+			//url에서 한번사용후 정보삭제
+			rdAttr.addFlashAttribute("msg","로그인 완료");
+			return "redirect:06_Test/main";
+		}else {
+			return "redirect:06_Test/login";
+		}
+	}
+	
+	
+	//json : {"userid":"java", "passwd":"1111", "email":"hong@gmail.com"}
+	//라이브러리 : jackson-databind : json데이터로 변환 라이브러리 추가
+	@RequestMapping(value="jsonTest", method = RequestMethod.GET)
+	public String jsonTestCall() {
+		return "07_jsonTest";
+	}
+	@RequestMapping(value ="jsonTest",method = RequestMethod.POST)
+	public @ResponseBody MemberDTO jsonTest(MemberDTO dto) {
+		dto.setUserid("java");
+		dto.setPasswd("1111");
+		dto.setEmail("hong@gmail.com");
+		logger.info(dto.toString());
+		return dto;
+	}
+	
+	//메소드 테스트
+	@RequestMapping("08_methodTest")
+	public void methodCall() {}
+	
+	@RequestMapping(value="methodTest", method = RequestMethod.GET)
+	public String methodTestGet(String name, int age) {
+		logger.info("Get방식");
+		logger.info(name + " " + age);
+		return "08_methodTest";
+	}
+
+	@RequestMapping(value="methodTest", method = RequestMethod.POST)
+	public String methodTestPost(String name, int age) {
+		logger.info("POST방식");
+		logger.info(name + " " + age);
+		return "08_methodTest";
+	}
+	
+	//join폼으로 이동 :GET방식
+	@RequestMapping(value = "join", method = RequestMethod.GET)
+	public String joinTest() {
+		return "08_Test/join";
+	}
+	//join 데이터 출력
+	@RequestMapping(value = "join", method = RequestMethod.POST)
+	public String joinTest(MemberDTO dto) {
+		logger.info(dto.toString());
+		return "08_Test/join";
+	}
+	
+	
+	
+}

@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../include/includeFile.jsp" %>
+<%@include file="../include/message.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회사소개 화면</title>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bu893hnprh"></script>
+<script type="text/javascript">
+	$(function() {
+		var location = $('#location').val();
+	});
+</script>
+</head>
+<body>
+	<h2>회사소개</h2>
+	위치 : <input id="location" type="text" value="서울시 관악구 관천로24길 26" size="50"> 
+	<div id="map" style="width:400px;height:400px;"></div>
+</body>
+</html>

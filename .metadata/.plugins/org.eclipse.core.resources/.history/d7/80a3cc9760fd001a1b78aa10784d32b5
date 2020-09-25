@@ -1,0 +1,40 @@
+package org.spring.controller;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import org.spring.service.NaverLoginService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/login")
+public class NaverLoginController {
+	
+	@Resource
+	private NaverLoginService nservice;
+	
+	// 네이버로그인 인증코드 요청
+	@RequestMapping("/naverLogin")
+	public String naverLogin(Model model,HttpSession session) throws UnsupportedEncodingException {
+		Map<String,String> map = nservice.getLoginUrl();
+
+		session.setAttribute("state", map.get("state"));
+		model.addAttribute("apiURL",map.get("apiURL"));
+		return "15_naverLogin/01_naverlogin";
+	}
+	
+	@RequestMapping("/callback")
+	public void callback(String code,String state,Model model) {
+		System.out.println("code : "+code);
+		System.out.println("state : "+state);
+		model.addAttribute("code",code);
+		model.addAttribute("state",state);
+		
+		// return "15_naverLogin/02_callback";
+	}
+}

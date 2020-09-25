@@ -1,0 +1,17 @@
+package org.spring.service;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class MapService {
+	
+	public Map<String,Double> getGeocoding(String address){
+		
+		//GEOcoding api ȣ
+		
+		return null;
+	}
+
+}

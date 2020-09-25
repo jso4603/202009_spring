@@ -1,0 +1,5 @@
+package com.myboard.service;
+
+public class MemberServiceImpl {
+
+}

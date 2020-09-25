@@ -81,36 +81,6 @@ public class MemberServiceImpl implements MemberService {
 		return msg;
 	}
 
-	// 로그인 체크
-	@Transactional
-	@Override
-	public Map<String, Object> loginCheck(String userid, String passwd) throws Exception {
-		String msg = null;
-		//result : 0(로그인성공),1(아이디미존재),2(패스워드불일치)
-		int result = -1;
-		
-		MemberDTO mdto = mdao.selectOne(userid);		
-		logger.debug("loginCheck id/pw : "+userid+"/"+passwd);
-
-		if(mdto == null) {
-			msg = "존재하지 않는 아이디입니다.";
-			result = 1;	
-		}else {
-			if(encoder.matches(passwd, mdto.getPasswd())){
-				msg = "로그인 성공";
-				result = 0;
-			} else {
-				msg = "비밀번호가 다릅니다.";
-				result = 2;
-			}
-		}
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("msg", msg);
-		map.put("result", result);
-		return map;	
-	}
-
 	//수정 폼에 데이터 전송
 	@Transactional
 	@Override

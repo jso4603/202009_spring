@@ -1,0 +1,12 @@
+package com.myboard.service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
+import org.json.simple.parser.ParseException;
+
+public interface NaverLoginService {
+	public Map<String,String> getLoginUrl() throws UnsupportedEncodingException;
+	public Map<String, String> getUserInfo(String code, String state) throws ParseException;
+	public String getToken(String code, String state) throws Exception;
+}

@@ -9,8 +9,6 @@ import com.myboard.dto.MemberDTO;
 public interface MemberService {
 	// 회원 가입
 	public Map<String,Object> insert(MemberDTO mdto, MultipartFile photofile) throws Exception;
-	// 로그인
-	public Map<String, Object> loginCheck(String userid, String passwd) throws Exception;
 	//수정 폼에 데이터 전송
 	public MemberDTO modify(String userid) throws Exception;
 	// 회원 정보수정

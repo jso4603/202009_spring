@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../include/includeFile.jsp" %>
+<%@include file="../include/message.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<title>로그인화면</title>
+</head>
+
+<script type="text/javascript">
+
+	function loginCheck() {
+		//필수 값 체크
+		var userid = loginForm.userid.value;
+		var passwd = loginForm.passwd.value;
+		
+		if (userid == ''){
+			alert('아이디를 입력하세요');
+			loginForm.userid.focus();
+		} else if(passwd == ''){
+			alert('비밀번호를 입력하세요');
+			loginForm.passwd.focus()
+		} else {
+			loginForm.submit();
+		}
+	}	
+</script>
+
+<body>
+	<h2>로그인화면</h2>
+	<form name="loginForm" action="${path}/login/" method="post">
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="userid"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="passwd"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" onclick="loginCheck()" value="로그인">
+					<input type="reset" value="취소">
+					<input type="button" value="회원가입" onclick="location.href = '${path}/member/join'">
+					<input type="button" value="메인화면" onclick="location.href = '${path}/board/'">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+  	<div id="naver_id_login"></div>
+  	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  	<script type="text/javascript">
+  		var naver_id_login = new naver_id_login("WzjwRR2PM6wmnTqMnjkt", "http://localhost:8081/sample/login/callback");
+  		var state = naver_id_login.getUniqState();
+  		naver_id_login.setButton("white", 2,40);
+  		naver_id_login.setDomain("http://localhost:8081/sample/login/naverLogin");
+  		naver_id_login.setState(state);
+  		naver_id_login.setPopup();
+  		naver_id_login.init_naver_id_login();
+  	</script>
+</body>
+</html>

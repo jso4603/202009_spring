@@ -7,6 +7,6 @@ import org.json.simple.parser.ParseException;
 
 public interface CompanyService {
 
-	Map<String, Double> getGeocoding(String address) throws IOException, ParseException;
+	public Map<String, Double> getGeocoding(String address) throws IOException, ParseException;
 
 }

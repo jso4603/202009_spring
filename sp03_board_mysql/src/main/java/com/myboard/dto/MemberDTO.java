@@ -11,6 +11,7 @@ public class MemberDTO {
 	private String addr1;
 	private String addr2;
 	private String filename;
+	private int joinflag; // 0: 일반, 1: 네이버, 2: 구글, 3: 카카오 
 	private Date regdate;
 	
 	public MemberDTO() {
@@ -18,7 +19,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String userid, String passwd, String email, String name, String zipcode, String addr1,
-			String addr2, String filename, Date regdate) {
+			String addr2, String filename, int joinflag, Date regdate) {
 		super();
 		this.userid = userid;
 		this.passwd = passwd;
@@ -28,6 +29,7 @@ public class MemberDTO {
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.filename = filename;
+		this.joinflag = joinflag;
 		this.regdate = regdate;
 	}
 
@@ -95,6 +97,14 @@ public class MemberDTO {
 		this.filename = filename;
 	}
 
+	public int getJoinflag() {
+		return joinflag;
+	}
+
+	public void setJoinflag(int joinflag) {
+		this.joinflag = joinflag;
+	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
@@ -107,8 +117,8 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", email=" + email + ", name=" + name
 				+ ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2 + ", filename=" + filename
-				+ ", regdate=" + regdate + "]";
+				+ ", joinflag=" + joinflag + ", regdate=" + regdate + "]";
 	}
-
+	
 	
 }
