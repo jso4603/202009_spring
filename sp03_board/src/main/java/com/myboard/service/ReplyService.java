@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.myboard.dto.ReplyDTO;
 
-//´ä±Û
+//ë‹µê¸€
 public interface ReplyService {
 	public int insert(ReplyDTO rdto) throws Exception;
 	public int update(ReplyDTO rdto) throws Exception;

@@ -22,7 +22,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Transactional
 	@Override
 	public int insert(ReplyDTO rdto) throws Exception {
-		// ´ñ±ÛÀÌ Ãß°¡µÉ ¶§ °Ô½ÃÆÇÀÇ ´ñ±Û ¼ö +1 
+		// ëŒ“ê¸€ì´ ì¶”ê°€ë  ë•Œ ê²Œì‹œíŒì˜ ëŒ“ê¸€ ìˆ˜ +1 
 		bdao.replycntUp_update(rdto.getBnum());
 		return rdao.insert(rdto);
 	}
@@ -35,7 +35,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Transactional
 	@Override
 	public int delete(int rnum,int bnum) throws Exception {
-		//´ñ±ÛÀÌ »èÁ¦µÉ¶§ °Ô½ÃÆÇÀÇ ´ñ±Û¼ö -1
+		//ëŒ“ê¸€ì´ ì‚­ì œë ë•Œ ê²Œì‹œíŒì˜ ëŒ“ê¸€ìˆ˜ -1
 		bdao.replycntDown_update(bnum);
 		return rdao.delete(rnum);
 	}

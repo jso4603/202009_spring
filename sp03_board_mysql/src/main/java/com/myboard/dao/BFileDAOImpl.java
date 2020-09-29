@@ -37,7 +37,7 @@ public class BFileDAOImpl implements BFileDAO {
 		return session.delete("bfileMapper.delete", bnum);
 	}
 
-	//¼öÁ¤½Ã ÀÏºÎÆÄÀÏ »èÁ¦
+	//ìˆ˜ì •ì‹œ ì¼ë¶€íŒŒì¼ ì‚­ì œ
 	@Override
 	public int delete_part(int bnum, String fnums) throws Exception {
 		Map<String, Object> map = new HashMap<>();

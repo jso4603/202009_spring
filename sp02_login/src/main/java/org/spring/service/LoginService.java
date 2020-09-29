@@ -5,6 +5,6 @@ import java.util.Map;
 import org.spring.dto.MemberDTO;
 
 public interface LoginService {
-	// �α��� üũ
+	// 로그인 체크
 	public Map<String, Object> loginCheck(String userid, String passwd);
 }

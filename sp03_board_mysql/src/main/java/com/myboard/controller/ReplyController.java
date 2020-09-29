@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myboard.dto.ReplyDTO;
 import com.myboard.service.ReplyService;
 
-//Controller + ResponseBody ÀÇ ±â´É
+//Controller + ResponseBody ì˜ ê¸°ëŠ¥
 @RestController
 @RequestMapping("/reply")
 public class ReplyController {
@@ -23,18 +23,18 @@ public class ReplyController {
 	@Resource
 	private ReplyService service;
 	
-	//´ñ±Û Ãß°¡
-		//@RequestBody : jsonÇüÅÂ·Î °ª ¹ŞÀ½
-		//produces="application/text; charset=utf-8" : ¹İÈ¯°ª ¹®ÀÚ ÇÑ±ÛÃ³¸®
+	//ëŒ“ê¸€ ì¶”ê°€
+		//@RequestBody : jsoní˜•íƒœë¡œ ê°’ ë°›ìŒ
+		//produces="application/text; charset=utf-8" : ë°˜í™˜ê°’ ë¬¸ì í•œê¸€ì²˜ë¦¬
 		@RequestMapping(value="/", method = RequestMethod.POST, produces="application/text; charset=utf-8")
 		public ResponseEntity<String> insert(@RequestBody ReplyDTO rdto) throws Exception {
 			service.insert(rdto);
-			//ÀÀ´ä°´Ã¼¸¦ »ı¼ºÇØ¼­ »óÅÂ°ª °°ÀÌ Àü¼Û
-			return new ResponseEntity<>("Ãß°¡¿Ï·á", HttpStatus.OK);
-			//return new ResponseEntity<>("½ÇÆĞ", HttpStatus.BAD_REQUEST);
+			//ì‘ë‹µê°ì²´ë¥¼ ìƒì„±í•´ì„œ ìƒíƒœê°’ ê°™ì´ ì „ì†¡
+			return new ResponseEntity<>("ì¶”ê°€ì™„ë£Œ", HttpStatus.OK);
+			//return new ResponseEntity<>("ì‹¤íŒ¨", HttpStatus.BAD_REQUEST);
 		}
 		
-		//´ñ±Û ÀüÃ¼Á¶È¸
+		//ëŒ“ê¸€ ì „ì²´ì¡°íšŒ
 		@RequestMapping(value="/{bnum}", method = RequestMethod.GET)
 		public ResponseEntity<List<ReplyDTO>> list(@PathVariable("bnum") int bnum) throws Exception {
 			List<ReplyDTO> list = service.selectList(bnum);
@@ -42,22 +42,22 @@ public class ReplyController {
 			
 		}
 		
-		//´ñ±Û »èÁ¦
+		//ëŒ“ê¸€ ì‚­ì œ
 		@RequestMapping(value="/{rnum}", method = RequestMethod.DELETE, produces="application/text; charset=utf-8")
 		public ResponseEntity<String> delete(@PathVariable("rnum") int rnum,int bnum) throws Exception {
 			service.delete(rnum, bnum);
-			//ÀÀ´ä°´Ã¼¸¦ »ı¼ºÇØ¼­ »óÅÂ°ª °°ÀÌ Àü¼Û
-			return new ResponseEntity<>("»èÁ¦¿Ï·á", HttpStatus.OK);
+			//ì‘ë‹µê°ì²´ë¥¼ ìƒì„±í•´ì„œ ìƒíƒœê°’ ê°™ì´ ì „ì†¡
+			return new ResponseEntity<>("ì‚­ì œì™„ë£Œ", HttpStatus.OK);
 		}
 		
-		//´ñ±Û ¼öÁ¤
+		//ëŒ“ê¸€ ìˆ˜ì •
 		@RequestMapping(value="/{rnum}", method = {RequestMethod.PUT,RequestMethod.PATCH},  
 				produces="application/text; charset=utf-8")
 		public ResponseEntity<String> update(@PathVariable("rnum") int rnum,@RequestBody ReplyDTO rdto) throws Exception {
-			rdto.setRnum(rnum); //´ñ±Û¹øÈ£ ¼¼ÆÃ
+			rdto.setRnum(rnum); //ëŒ“ê¸€ë²ˆí˜¸ ì„¸íŒ…
 			service.update(rdto);
-			//ÀÀ´ä°´Ã¼¸¦ »ı¼ºÇØ¼­ »óÅÂ°ª °°ÀÌ Àü¼Û
-			return new ResponseEntity<>("¼öÁ¤¿Ï·á", HttpStatus.OK);
+			//ì‘ë‹µê°ì²´ë¥¼ ìƒì„±í•´ì„œ ìƒíƒœê°’ ê°™ì´ ì „ì†¡
+			return new ResponseEntity<>("ìˆ˜ì •ì™„ë£Œ", HttpStatus.OK);
 		}
 	
 }

@@ -24,29 +24,29 @@ public class MemberController {
 	@Resource
 	private MemberDAO dao;
 	
-	//09_Mybatis/memberList.jsp È­¸é Ãâ·Â & È¸¿ø ÀüÃ¼ Á¶È¸
+	//09_Mybatis/memberList.jsp í™”ë©´ ì¶œë ¥ & íšŒì› ì „ì²´ ì¡°íšŒ
 	@RequestMapping("/list")
 	public String memberList(Model model,@ModelAttribute("msg") String msg) {
-		logger.debug("daoÁÖÀÔ : "+dao.toString());
+		logger.debug("daoì£¼ì… : "+dao.toString());
 		List<MemberDTO> list = dao.selectList();
 		logger.debug("memberList list : "+list.toString());
 		model.addAttribute("list",list);
 		return "09_Mybatis/memberList";
 	}
 	
-	//insertÆûÀ¸·Î ÀÌµ¿
+	//insertí¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String memberInsert() {
 		return "09_Mybatis/memberInsert";
 	}
 	
-	//¸â¹öÀúÀåÇÏ°í ¸®½ºÆ®·Î ÀÌµ¿
+	//ë©¤ë²„ì €ì¥í•˜ê³  ë¦¬ìŠ¤íŠ¸ë¡œ ì´ë™
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String memberInsert(MemberDTO dto, Model model,
 			RedirectAttributes attributes) {
 		int cnt = dao.insert(dto);
 		logger.debug("memberInsert cnt : "+cnt);
-		attributes.addFlashAttribute("msg",cnt+"°Ç Ãß°¡¿Ï·á");
+		attributes.addFlashAttribute("msg",cnt+"ê±´ ì¶”ê°€ì™„ë£Œ");
 		
 		return "redirect:/member/list";
 	}

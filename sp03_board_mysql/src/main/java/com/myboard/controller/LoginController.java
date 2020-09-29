@@ -20,13 +20,13 @@ public class LoginController {
 	@Resource
 	private LoginService lservice;
 	
-	// ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	// ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login() throws UnsupportedEncodingException {
 		return "login/login";
 	}
 	
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String login(String userid, String passwd,
 			RedirectAttributes redirectAttributes,
@@ -36,14 +36,14 @@ public class LoginController {
 		redirectAttributes.addFlashAttribute("msg",map.get("msg"));
 		redirectAttributes.addFlashAttribute("userid",userid);
 
-		// ·Î±×ÀÎ ¼º°øÇÑ °æ¿ì
+		// ë¡œê·¸ì¸ ì„±ê³µí•œ ê²½ìš°
 		if((int)map.get("result") == 0) {
 			httpSession.setAttribute("userid", userid);
 			httpSession.setMaxInactiveInterval(60*60);
 			return "redirect:/board/list";
 		} 
 		
-		// ·Î±×ÀÎ ½ÇÆĞ
+		// ë¡œê·¸ì¸ ì‹¤íŒ¨
 		return "redirect:/login/login";
 	}
 

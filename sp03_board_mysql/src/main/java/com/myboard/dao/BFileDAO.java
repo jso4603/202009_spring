@@ -5,14 +5,14 @@ import java.util.List;
 import com.myboard.dto.BFileDTO;
 
 public interface BFileDAO {
-	//ÆÄÀÏÁ¶È¸
+	//íŒŒì¼ì¡°íšŒ
 	public List<BFileDTO> selectList(int bnum) throws Exception;
-	//Ãß°¡
+	//ì¶”ê°€
 	public int insert(BFileDTO fdto) throws Exception;
-	//¼öÁ¤
+	//ìˆ˜ì •
 	public int update(BFileDTO fdto) throws Exception;
-	//»èÁ¦
+	//ì‚­ì œ
 	public int delete(int bnum) throws Exception;
-	//¼öÁ¤½Ã ÀÏºÎÆÄÀÏ »èÁ¦
+	//ìˆ˜ì •ì‹œ ì¼ë¶€íŒŒì¼ ì‚­ì œ
 	public int delete_part(int bnum, String fnums) throws Exception;
 }

@@ -20,12 +20,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Map<String, Double> getGeocoding(String address) throws IOException, ParseException {
-		// ¸®ÅÏ °´Ã¼ »ı¼º
+		// ë¦¬í„´ ê°ì²´ ìƒì„±
 		Map<String, Double> resultMap = new HashMap<String, Double>();
 		
 		System.out.println("getGeocoding:" + address);
 		address = URLEncoder.encode(address, "utf-8");
-		//Geocodding apiÈ£Ãâ
+		//Geocodding apií˜¸ì¶œ
 		String api  = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query="+address;
 		URL url = new URL(api);
 		HttpURLConnection http =  (HttpURLConnection) url.openConnection();
@@ -41,16 +41,16 @@ public class CompanyServiceImpl implements CompanyService {
 		while ((rdData = br.readLine())!= null ) {
 			//System.out.println(rdData);
 			JSONObject object = (JSONObject)new JSONParser().parse(rdData);
-			JSONArray array = (JSONArray)object.get("addresses"); //°¡Á®¿Â °ªÀÌ ¹è¿­
+			JSONArray array = (JSONArray)object.get("addresses"); //ê°€ì ¸ì˜¨ ê°’ì´ ë°°ì—´
 			for(int i = 0 ;i < array.size(); i++) {
 				object = (JSONObject)array.get(i);
 				System.out.println(object);
 				String roadAddress = (String) object.get("roadAddress");
-				//x : °æµµ, y : À§µµ  ÆÄ½Ì Ãâ·Â
+				//x : ê²½ë„, y : ìœ„ë„  íŒŒì‹± ì¶œë ¥
 				double x = Float.parseFloat((String)object.get("x"));
 				double y = Float.parseFloat((String)object.get("y"));
-				System.out.println("x(°æµµ):" + x );
-				System.out.println("y(À§µµ):" + y );
+				System.out.println("x(ê²½ë„):" + x );
+				System.out.println("y(ìœ„ë„):" + y );
 				resultMap.put("x", x);
 				resultMap.put("y", y);
 			}			

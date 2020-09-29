@@ -28,31 +28,31 @@ public class MemberServiceImpl implements MemberService {
 	@Resource
 	private BFileService fservice;
 
-	// È¸¿ø °¡ÀÔ 
+	// íšŒì› ê°€ì… 
 	@Transactional
 	@Override
 	public Map<String,Object> insert(MemberDTO mdto, MultipartFile photofile) throws Exception {
 		String msg = null;
-		//result : 0(È¸¿ø°¡ÀÔ ¼º°ø),1(È¸¿ø°¡ÀÔ ½ÇÆĞ)
+		//result : 0(íšŒì›ê°€ì… ì„±ê³µ),1(íšŒì›ê°€ì… ì‹¤íŒ¨)
 		int result = -1;
 		
-		//¾ÆÀÌµğ Áßº¹ Ã¼Å©
+		//ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 		MemberDTO rdto =mdao.selectOne(mdto.getUserid());
 		
-		if(rdto == null) { // ±âÁ¸ ¾ÆÀÌµğ ¹ÌÁ¸Àç
-			// ÆĞ½º¿öµå ¾ÏÈ£È­
+		if(rdto == null) { // ê¸°ì¡´ ì•„ì´ë”” ë¯¸ì¡´ì¬
+			// íŒ¨ìŠ¤ì›Œë“œ ì•”í˜¸í™”
 			mdto.setPasswd(encoder.encode(mdto.getPasswd()));
 			
-			// È¸¿ø»çÁø ÀúÀåÇÏ°í ÀúÀåµÈ ÆÄÀÏ ÀÌ¸§
+			// íšŒì›ì‚¬ì§„ ì €ì¥í•˜ê³  ì €ì¥ëœ íŒŒì¼ ì´ë¦„
 			String filename = fservice.fileUpload(photofile);
 			mdto.setFilename(filename);
 			logger.info("insert dto : "+mdto);
 			
 			mdao.insert(mdto);
-			msg = "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 			result = 0;
 		} else {
-			msg = "Áßº¹µÈ ¾ÆÀÌµğ°¡ ÀÖ½À´Ï´Ù.";
+			msg = "ì¤‘ë³µëœ ì•„ì´ë””ê°€ ìˆìŠµë‹ˆë‹¤.";
 			result = 1;
 		}
 		
@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
-	// È¸¿ø ¼öÁ¤ 
+	// íšŒì› ìˆ˜ì • 
 	@Transactional
 	@Override
 	public String update(MemberDTO mdto,MultipartFile photofile) throws Exception {
@@ -76,12 +76,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 			
 		mdao.update(mdto);
-		msg = "Á¤º¸¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		msg = "ì •ë³´ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 
 		return msg;
 	}
 
-	//¼öÁ¤ Æû¿¡ µ¥ÀÌÅÍ Àü¼Û
+	//ìˆ˜ì • í¼ì— ë°ì´í„° ì „ì†¡
 	@Transactional
 	@Override
 	public MemberDTO modify(String userid) throws Exception {
@@ -89,7 +89,7 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 	
-	// ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ È®ÀÎ
+	// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€ í™•ì¸
 	@Transactional
 	@Override
 	public boolean checkPW(String passwd, String insertPW) throws Exception {
@@ -99,7 +99,7 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	@Transactional
 	@Override
 	public String changePW(MemberDTO dto, String oldPW, String newPW) throws Exception {
@@ -110,26 +110,26 @@ public class MemberServiceImpl implements MemberService {
 			dto.setPasswd(passwd);
 			
 			mdao.changePW(dto);
-			msg = "ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾ú½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		} else {
-			msg = "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 		}
 		return msg;
 	}
 
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@Transactional
 	@Override
 	public String delete(MemberDTO dto,String insertPW) throws Exception {
 		String msg = null;
 
 		
-		// ÀÏÄ¡ÇÏ¸é ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­ ÇÏ¿© dto ¼öÁ¤ ÈÄ DB¿¡ ÀÔ·Â
+		// ì¼ì¹˜í•˜ë©´ ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™” í•˜ì—¬ dto ìˆ˜ì • í›„ DBì— ì…ë ¥
 		if(encoder.matches(insertPW, dto.getPasswd())) {
 			mdao.delete(dto.getUserid());
-			msg = "È¸¿øÅ»Åğ°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "íšŒì›íƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 		} else {
-			msg = "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 		}
 		
 		return msg;

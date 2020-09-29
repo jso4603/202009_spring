@@ -19,48 +19,48 @@ import org.springframework.stereotype.Component;
 public class ServiceAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(ServiceAdvice.class);
 	
-	//¾Ö½ºÆÑÆ® : Æ÷ÀÎÆ®ÄÆ(¾î¶²¸Ş¼Òµå) + ¾îµå¹ÙÀÌ½º(¹«¾ùÀ»)
-	//Á¶ÀÎÆ÷ÀÎÆ® : ½ÇÇàÀÌ µÇ´Â ±¸Ã¼ÀûÀÎ ´ë»ó
+	//ì• ìŠ¤íŒ©íŠ¸ : í¬ì¸íŠ¸ì»·(ì–´ë–¤ë©”ì†Œë“œ) + ì–´ë“œë°”ì´ìŠ¤(ë¬´ì—‡ì„)
+	//ì¡°ì¸í¬ì¸íŠ¸ : ì‹¤í–‰ì´ ë˜ëŠ” êµ¬ì²´ì ì¸ ëŒ€ìƒ
 //	@Before("execution(* org.spring.service.FileService*.*(..))")
 //	public void startLog(JoinPoint jp) {
-//		logger.info("------¸Å°³º¯¼ö------");
+//		logger.info("------ë§¤ê°œë³€ìˆ˜------");
 //		logger.info(jp.getSignature().getName() + ":" + Arrays.deepToString(jp.getArgs()));
 //	}
 	
-	//¸Ş¼Òµå ¹İÈ¯°ª Ãâ·Â
-	//pointcut : Àû¿ëÇÒ ´ë»ó
-	//Àû¿ë´ë»ó Á¤»ó¼öÇàÈÄ
+	//ë©”ì†Œë“œ ë°˜í™˜ê°’ ì¶œë ¥
+	//pointcut : ì ìš©í•  ëŒ€ìƒ
+	//ì ìš©ëŒ€ìƒ ì •ìƒìˆ˜í–‰í›„
 //	@AfterReturning(pointcut="execution(* org.spring.service.FileService*.*(..))", returning = "rObj")
 //	public void afterLog(JoinPoint jp, Object rObj) {
-//		logger.info("------¸®ÅÏ°ª------");
+//		logger.info("------ë¦¬í„´ê°’------");
 //		logger.info(jp.getSignature().getName()+":" + rObj.toString());
 //	}
 	
-	//¿¹¿Ü°¡ ¹ß»ı
+	//ì˜ˆì™¸ê°€ ë°œìƒ
 //	@AfterThrowing(pointcut="execution(* org.spring.service.FileService*.*(..))",throwing = "eObj")
 //	public void exceptionLog(JoinPoint jp, Exception eObj) {
-//		logger.info("------¿¹¿Ü¹ß»ı------");
+//		logger.info("------ì˜ˆì™¸ë°œìƒ------");
 //		if (eObj instanceof NullPointerException) {
-//			logger.info(jp.getSignature().getName() + ":" + "¹İÈ¯µÇ´Â °´Ã¼°¡ ¾ø½À´Ï´Ù.");
-//			logger.info("¿¹¿Ü:" + eObj.toString());
+//			logger.info(jp.getSignature().getName() + ":" + "ë°˜í™˜ë˜ëŠ” ê°ì²´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+//			logger.info("ì˜ˆì™¸:" + eObj.toString());
 //		}
 //	}
 	
-	//¸ğµâÀÇ ¼Ò¿ä½Ã°£ Ã¼Å©
+	//ëª¨ë“ˆì˜ ì†Œìš”ì‹œê°„ ì²´í¬
 	@Around("execution(* org.spring.service.FileService*.*(..))")
 	public Object timeLog(ProceedingJoinPoint pjp) throws Throwable {
-		logger.info("------¼Ò¿ä½Ã°£------");
-		//½ÃÀÛ½Ã°£
+		logger.info("------ì†Œìš”ì‹œê°„------");
+		//ì‹œì‘ì‹œê°„
 		long startTime = System.currentTimeMillis();
 		
-		//Á¶ÀÎÆ÷ÀÎÆ® Æ÷ÀÎÆ®ÄÆ(½ÇÁ¦½ÇÇàÇÒ ¸Ş¼Òµå)À» ½ÇÇà
-		//result : ½ÇÇà¸Ş¼ÒµåÀÇ ¹İÈ¯°ª
+		//ì¡°ì¸í¬ì¸íŠ¸ í¬ì¸íŠ¸ì»·(ì‹¤ì œì‹¤í–‰í•  ë©”ì†Œë“œ)ì„ ì‹¤í–‰
+		//result : ì‹¤í–‰ë©”ì†Œë“œì˜ ë°˜í™˜ê°’
 		Object result = pjp.proceed();
 		
-		//³¡½Ã°£
+		//ëì‹œê°„
 		long endTime = System.currentTimeMillis();
 		
-		//¼Ò¿ä½Ã°£
+		//ì†Œìš”ì‹œê°„
 		logger.info(pjp.getSignature().getName() + ":" + (endTime-startTime));
 		
 		logger.info(result.toString());

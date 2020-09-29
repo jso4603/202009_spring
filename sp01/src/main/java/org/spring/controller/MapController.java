@@ -19,7 +19,7 @@ public class MapController {
 	@Resource
 	private MapService mapservice;
 	
-	// ±âº» ¸Ê
+	// ê¸°ë³¸ ë§µ
 	@RequestMapping("/map01")
 	public String mapSample() {
 		return "14_map/01_mapApi";
@@ -29,7 +29,7 @@ public class MapController {
 	public String mapGeocoding() {
 		return "14_map/02_geocoding";
 	}
-	// ÁÖ¼Ò¸¦ ÀÌ¿ëÇØ¼­ À§°æµµ Ã£±â
+	// ì£¼ì†Œë¥¼ ì´ìš©í•´ì„œ ìœ„ê²½ë„ ì°¾ê¸°
 	@RequestMapping("/geocodingFind")
 	@ResponseBody
 	public Map<String,Double> mapGeocodingFind(@RequestParam String address) throws IOException, ParseException {

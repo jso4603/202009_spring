@@ -9,21 +9,21 @@ import com.myboard.dto.BoardDTO;
 import com.myboard.dto.PageDTO;
 
 public interface BoardService {
-	//ÀüÃ¼Á¶È¸
+	//ì „ì²´ì¡°íšŒ
 	public List<BoardDTO> selectList(PageDTO pdto) throws Exception;
-	//ÇÑ°ÇÁ¶È¸
+	//í•œê±´ì¡°íšŒ
 	public Map<String, Object> selectOne(int bnum) throws Exception;
-	//Ãß°¡
+	//ì¶”ê°€
 	public int insert(BoardDTO bdto, List<MultipartFile> bfiles) throws Exception;
-	//¼öÁ¤
+	//ìˆ˜ì •
 	public int update(BoardDTO bdto, List<Integer> fnumList,List<MultipartFile> bfiles) throws Exception;
-	//»èÁ¦
+	//ì‚­ì œ
 	public int delete(int bnum) throws Exception;
-	//Á¶È¸¼ö +1
+	//ì¡°íšŒìˆ˜ +1
 	public int readcnt_update(int bnum) throws Exception;
-	//´ñ±Û¼ö + 1
+	//ëŒ“ê¸€ìˆ˜ + 1
 	public int replycntUp_update(int bnum) throws Exception;
-	//´ñ±Û¼ö -1
+	//ëŒ“ê¸€ìˆ˜ -1
 	public int replycntDown_update(int bnum) throws Exception;
 
 }

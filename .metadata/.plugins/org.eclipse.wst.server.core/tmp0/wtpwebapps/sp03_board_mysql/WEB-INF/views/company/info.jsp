@@ -58,7 +58,7 @@
 </head>
 <body>
 	<h2>회사소개</h2>
-	위치 : <input id="address" type="text" value="서울시 관악구 관천로24길 26" size="50"> 
+	위치 : <input id="address" type="text" value="서울시 관악구 관천로24길 26" size="50" readonly> 
 	<button type="button" id="main">메인화면</button>
 	<div id="map" style="width:400px;height:400px;"></div>
 </body>

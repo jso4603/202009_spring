@@ -18,14 +18,14 @@ public class SecurityController {
 	
 	@Resource
 	private SecurityService service;
-	//ÆĞ½º¿öµå ¾ÏÈ£È­
+	//íŒ¨ìŠ¤ì›Œë“œ ì•”í˜¸í™”
 	@RequestMapping("/encode")
 	public void security(@RequestParam String passwd) {
 		logger.info(passwd);
 		service.securityTestMethod(passwd);
 	}
 	
-	//µî·ÏµÈ ÆĞ½º¿öµå ÀÏÄ¡È®ÀÎ
+	//ë“±ë¡ëœ íŒ¨ìŠ¤ì›Œë“œ ì¼ì¹˜í™•ì¸
 	@RequestMapping("/pwcheck")
 	public void sequrityCheck(String passwd) {
 		service.pwCheckTestMethod(passwd);

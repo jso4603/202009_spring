@@ -1,9 +1,0 @@
-package com.myboard.service;
-
-import com.myboard.dto.MemberDTO;
-
-public class MemberService {
-
-	public void insert(MemberDTO mdto) {};
-
-}

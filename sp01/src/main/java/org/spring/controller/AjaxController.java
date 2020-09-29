@@ -20,57 +20,57 @@ public class AjaxController {
 	@Resource
 	private MemberDAO dao;
 	
-	//ajaxÅ×½ºÆ® Æû È£Ãâ
+	//ajaxí…ŒìŠ¤íŠ¸ í¼ í˜¸ì¶œ
 	@RequestMapping("/text")
 	public String textResult() throws Exception{
 		return "13_ajax/01_text";
 	}
 	
-	//ajaxÅ×½ºÆ®
-	//produces : ¸®ÅÏ°ªÀÇ ÇÑ±ÛÃ³¸®
-	//@ResponseBody : ¹İÈ¯°ªÀ» µ¥ÀÌÅÍ ÀÚÃ¼·Î ÀÎ½Ä(json/text)
+	//ajaxí…ŒìŠ¤íŠ¸
+	//produces : ë¦¬í„´ê°’ì˜ í•œê¸€ì²˜ë¦¬
+	//@ResponseBody : ë°˜í™˜ê°’ì„ ë°ì´í„° ìì²´ë¡œ ì¸ì‹(json/text)
 	@ResponseBody
 	@RequestMapping(value="/textResult",produces = "application/text; charset=utf-8")
 	public String textResult(String userid, int age) throws Exception{
 		System.out.println(userid);
 		System.out.println(age);
-		return "ÀÌ¸§ : "+userid + "<br> ³ªÀÌ : "+age;
+		return "ì´ë¦„ : "+userid + "<br> ë‚˜ì´ : "+age;
 	}
 	
-	//jsonÀ¸·Î °ª ¹Ş°í text ¸®ÅÏ
+	//jsonìœ¼ë¡œ ê°’ ë°›ê³  text ë¦¬í„´
 	@ResponseBody
 	@RequestMapping(value="/jsonSend",produces = "application/text; charset=utf-8")
 	public String jsonSend(@RequestBody HashMap<String, Object> map) {
 		System.out.println(map);
-		return "¼º°ø";
+		return "ì„±ê³µ";
 	}
 	
-	//jsonÀ¸·Î °ª ¸®ÅÏ Æû È£Ãâ
+	//jsonìœ¼ë¡œ ê°’ ë¦¬í„´ í¼ í˜¸ì¶œ
 	@RequestMapping("/json")
 	public String json() throws Exception{
 		return "13_ajax/02_json";
 	}
 	
-	//jsonÀ¸·Î ¸®ÅÏ (List<MemberDTO>) ÀüÃ¼
+	//jsonìœ¼ë¡œ ë¦¬í„´ (List<MemberDTO>) ì „ì²´
 	@ResponseBody
 	@RequestMapping("/jsonResult")
 	public List<MemberDTO> jsonResult() throws Exception {
-		System.out.println("¸â¹ö¸®½ºÆ® ¹İÈ¯");
+		System.out.println("ë©¤ë²„ë¦¬ìŠ¤íŠ¸ ë°˜í™˜");
 		List<MemberDTO> list = dao.selectList();
 		System.out.println("list : "+list);
-		/* jackson-databind¶óÀÌºê·¯¸® ÇÊ¿ä */
+		/* jackson-databindë¼ì´ë¸ŒëŸ¬ë¦¬ í•„ìš” */
 		return list;
 	}
 	
-	//restÀû¿ë : {userid}´Â º¯¼ö
-	//restfullÇÑ ¹æ½ÄÀ¸·Î Àû¿ë
+	//restì ìš© : {userid}ëŠ” ë³€ìˆ˜
+	//restfullí•œ ë°©ì‹ìœ¼ë¡œ ì ìš©
 	@ResponseBody
 	@RequestMapping("/jsonResultOne/{userid}")
 	public List<MemberDTO> jsonResultOne(@PathVariable("userid") String userid) throws Exception {
 		System.out.println(userid);
 		return null;
 	}
-	/* restfullÇÑ ¼³°è ¹æ½Ä
+	/* restfullí•œ ì„¤ê³„ ë°©ì‹
 	 * insert : /board/{bnum} : method : post 
 	 * update : /board/{bnum} : method : put/ patch 
 	 * delete : /board/{bnum} : method : delete 

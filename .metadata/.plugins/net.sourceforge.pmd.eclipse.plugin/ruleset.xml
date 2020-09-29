@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="pmd-eclipse"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+   <description>PMD Plugin preferences rule set</description>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AvoidThrowingNullPointerException"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AvoidThrowingRawExceptionTypes"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EqualsNull"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/VariableNamingConventions"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AvoidReassigningParameters"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/StringInstantiation"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AbstractClassWithoutAbstractMethod"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AssignmentInOperand"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AssignmentToNonFinalStatic"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AvoidArrayLoops"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/ConstantsInInterface"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/AvoidSynchronizedAtMethodLevel"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyCatchBlock"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyFinallyBlock"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyIfStmt"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyStatementNotInLoop"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyTryBlock"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/EmptyWhileStmt"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/FinalFieldCouldBeStatic"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/ImmutableField"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/ImportFromSamePackage"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/InefficientEmptyStringCheck"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/InefficientStringBuffering"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/MisleadingVariableName"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/SimpleDateFormatNeedsLocale"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/SimplifyBooleanExpressions"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/StringToString"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/SwitchStmtsShouldHaveDefault"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UncommentedEmptyMethodBody"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnnecessaryConversionTemporary"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnnecessaryParentheses"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnnecessaryWrapperObjectCreation"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnusedFormalParameter"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnusedPrivateField"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UnusedPrivateMethod"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/UselessStringValueOf"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/DuplicateImports"/>
+   <rule ref="/Users/jangsang-og/Downloads/EgovInspectionRules_kor-3.8.xml/SystemPrintln"/>
+</ruleset>

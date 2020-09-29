@@ -21,13 +21,13 @@ public class CompanyController {
 	@Resource
 	private CompanyService cservice;
 
-	// È¸»ç¼Ò°³ È­¸é ÀÌµ¿
+	// íšŒì‚¬ì†Œê°œ í™”ë©´ ì´ë™
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String company() throws Exception {
 		return "/company/info";
 	}
 	
-	// È¸»ç Áöµµ Ãâ·Â
+	// íšŒì‚¬ ì§€ë„ ì¶œë ¥
 	@RequestMapping("/geocodingFind")
 	@ResponseBody
 	public Map<String,Double> mapGeocodingFind(@RequestParam String address) throws IOException, ParseException {

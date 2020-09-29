@@ -3,14 +3,14 @@ package com.myboard.dao;
 import com.myboard.dto.MemberDTO;
 
 public interface MemberDAO {
-	// È¸¿ø °¡ÀÔ
+	// íšŒì› ê°€ì…
 	public void insert(MemberDTO mdto) throws Exception;
-	// È¸¿øÁ¤º¸ ¼öÁ¤
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	public void update(MemberDTO mdto) throws Exception;
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	public void delete(String userid) throws Exception;
-	// È¸¿ø ÇÑ °Ç Á¶È¸
+	// íšŒì› í•œ ê±´ ì¡°íšŒ
 	public MemberDTO selectOne(String userid) throws Exception;
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	public void changePW(MemberDTO dto) throws Exception;
 }

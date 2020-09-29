@@ -26,30 +26,30 @@ public class MemberServiceImpl implements MemberService {
 	@Resource
 	private FileService fservice;
 	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	@Override
 	public Map<String,Object> insert(MemberDTO dto,MultipartFile photofile) {
 		String msg = null;
-		//result : 0(È¸¿ø°¡ÀÔ ¼º°ø),1(È¸¿ø°¡ÀÔ ½ÇÆĞ)
+		//result : 0(íšŒì›ê°€ì… ì„±ê³µ),1(íšŒì›ê°€ì… ì‹¤íŒ¨)
 		int result = -1; 
 		
-		//¾ÆÀÌµğ Áßº¹ Ã¼Å©
+		//ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 		MemberDTO rdto = dao.selectOne(dto.getUserid());
 		
-		if(rdto == null) { // ±âÁ¸ ¾ÆÀÌµğ ¹ÌÁ¸Àç
-			// ÆĞ½º¿öµå ¾ÏÈ£È­
+		if(rdto == null) { // ê¸°ì¡´ ì•„ì´ë”” ë¯¸ì¡´ì¬
+			// íŒ¨ìŠ¤ì›Œë“œ ì•”í˜¸í™”
 			dto.setPasswd(encoder.encode(dto.getPasswd()));
 			
-			// È¸¿ø»çÁø ÀúÀåÇÏ°í ÀúÀåµÈ ÆÄÀÏ ÀÌ¸§
+			// íšŒì›ì‚¬ì§„ ì €ì¥í•˜ê³  ì €ì¥ëœ íŒŒì¼ ì´ë¦„
 			String filename = fservice.fileUpload(photofile);
 			dto.setFilename(filename);
 			logger.info("insert dto : "+dto);
 			
 			dao.insert(dto);
-			msg = "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 			result = 0;
 		} else {
-			msg = "Áßº¹µÈ ¾ÆÀÌµğ°¡ ÀÖ½À´Ï´Ù.";
+			msg = "ì¤‘ë³µëœ ì•„ì´ë””ê°€ ìˆìŠµë‹ˆë‹¤.";
 			result = 1;
 		}
 		
@@ -59,14 +59,14 @@ public class MemberServiceImpl implements MemberService {
 		return map;
 	}
 
-	//¼öÁ¤ Æû¿¡ °¡Á®°¥ µ¥ÀÌÅÍ
+	//ìˆ˜ì • í¼ì— ê°€ì ¸ê°ˆ ë°ì´í„°
 	@Override
 	public MemberDTO modify(String userid) {
 		MemberDTO dto = dao.selectOne(userid);
 		return dto;
 	}
 	
-	// È¸¿øÁ¤º¸ ¼öÁ¤
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	@Override
 	public String update(MemberDTO dto,MultipartFile photofile) {
 		String msg = null;
@@ -78,29 +78,29 @@ public class MemberServiceImpl implements MemberService {
 		}
 			
 		dao.update(dto);
-		msg = "Á¤º¸¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		msg = "ì •ë³´ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 
 		return msg;
 	}
 
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@Override
 	public String delete(MemberDTO dto,String insertPW) {
 		String msg = null;
 
 		
-		// ÀÏÄ¡ÇÏ¸é ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­ ÇÏ¿© dto ¼öÁ¤ ÈÄ DB¿¡ ÀÔ·Â
+		// ì¼ì¹˜í•˜ë©´ ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™” í•˜ì—¬ dto ìˆ˜ì • í›„ DBì— ì…ë ¥
 		if(encoder.matches(insertPW, dto.getPasswd())) {
 			dao.delete(dto.getUserid());
-			msg = "È¸¿øÅ»Åğ°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "íšŒì›íƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 		} else {
-			msg = "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 		}
 		
 		return msg;
 	}
 
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	@Override
 	public String changePW(MemberDTO dto,String oldPW,String newPW) {
 		String msg = null;
@@ -110,14 +110,14 @@ public class MemberServiceImpl implements MemberService {
 			dto.setPasswd(passwd);
 			
 			dao.changePW(dto);
-			msg = "ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾ú½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		} else {
-			msg = "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+			msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 		}
 		return msg;
 	}
 	
-	// ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ È®ÀÎ
+	// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€ í™•ì¸
 	@Override
 	public boolean checkPW(String passwd, String insertPW) {
 		if(encoder.matches(insertPW, passwd)) {

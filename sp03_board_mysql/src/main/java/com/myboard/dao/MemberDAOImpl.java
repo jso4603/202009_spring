@@ -13,31 +13,31 @@ public class MemberDAOImpl implements MemberDAO {
 	@Resource
 	private SqlSession session;
 
-	// È¸¿ø °¡ÀÔ
+	// íšŒì› ê°€ì…
 	@Override
 	public void insert(MemberDTO mdto) throws Exception {
 		session.insert("memberMapper.insert",mdto);
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤
+	// íšŒì› ì •ë³´ ìˆ˜ì •
 	@Override
 	public void update(MemberDTO mdto) throws Exception {
 		session.update("memberMapper.update",mdto);
 	}
 
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@Override
 	public void delete(String userid) throws Exception {
 		session.delete("memberMapper.delete",userid);
 	}
 
-	// È¸¿ø ÇÑ °Ç Á¶È¸
+	// íšŒì› í•œ ê±´ ì¡°íšŒ
 	@Override
 	public MemberDTO selectOne(String userid) throws Exception {
 		return session.selectOne("memberMapper.selectOne",userid);
 	}
 	
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	@Override
 	public void changePW(MemberDTO dto) throws Exception {
 		session.update("memberMapper.changePW",dto);

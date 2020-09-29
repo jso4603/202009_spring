@@ -23,14 +23,14 @@ public class FileController {
 	@Resource
 	private FileService service;
 	
-	// ÆÄÀÏ ¾÷·Îµå ÆûÀ¸·Î ÀÌµ¿
+	// íŒŒì¼ ì—…ë¡œë“œ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String fileUpload() {
 		
 		return "10_fileUpload";
 	}
 	
-	// ÆÄÀÏÀ» ¾÷·Îµå
+	// íŒŒì¼ì„ ì—…ë¡œë“œ
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String fileUpload(String name,MultipartFile myfile,Model model) {
 		logger.info("fileUpload name/myfile : "+name+"/"+myfile);
@@ -39,14 +39,14 @@ public class FileController {
 		return "10_fileUpload";
 	}
 	
-	// ¿©·¯°³ ÆÄÀÏ ¾÷·Îµå ÆûÀ¸·Î ÀÌµ¿
+	// ì—¬ëŸ¬ê°œ íŒŒì¼ ì—…ë¡œë“œ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/uploads", method = RequestMethod.GET)
 	public String fileUploads() {
 			
 		return "11_multiFileUpload";
 	}
 	
-	// ¿©·¯°³ ÆÄÀÏ ¾÷·Îµå
+	// ì—¬ëŸ¬ê°œ íŒŒì¼ ì—…ë¡œë“œ
 	@RequestMapping(value = "/uploads", method = RequestMethod.POST)
 	public String fileUploads(String name,List<MultipartFile> myfiles,Model model) {
 		
@@ -59,7 +59,7 @@ public class FileController {
 		return "11_multiFileUpload";
 	}
 	
-	// ÆÄÀÏ ´Ù¿î·Îµå
+	// íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@RequestMapping("/download")
 	public String fileDownload(String filename,HttpServletResponse response) {
 		logger.info(filename);

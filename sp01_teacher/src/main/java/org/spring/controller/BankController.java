@@ -15,13 +15,13 @@ public class BankController {
 	@Resource
 	private BankService bankService;
 	
-	//±İ¾× ÀÌÃ¼ ÆûÀ¸·Î ÀÌµ¿
+	//ê¸ˆì•¡ ì´ì²´ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/" , method = RequestMethod.GET)
 	public String bank() {
 		return "12_bankTransaction";
 	}
 
-	//±İ¾× ÀÌÃ¼
+	//ê¸ˆì•¡ ì´ì²´
 	@RequestMapping(value = "/" , method = RequestMethod.POST)
 	public String bank(@RequestParam("money") int money) {
 		bankService.insert(money);

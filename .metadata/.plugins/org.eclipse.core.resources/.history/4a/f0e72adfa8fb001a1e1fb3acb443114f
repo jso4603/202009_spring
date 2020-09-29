@@ -1,9 +1,0 @@
-package com.myboard.service;
-
-import java.util.Map;
-
-public interface CompanyService {
-
-	Map<String, Double> getGeocoding(String address);
-
-}

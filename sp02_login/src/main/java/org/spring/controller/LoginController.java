@@ -24,13 +24,13 @@ public class LoginController {
 	@Resource
 	private LoginService service;
 		
-	// ·Î±×ÀÎ È­¸é Ãâ·Â
+	// ë¡œê·¸ì¸ í™”ë©´ ì¶œë ¥
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(@ModelAttribute("msg") String msg) {
 		return "Login/login";
 	}
 	
-	// ·Î±×ÀÎ 
+	// ë¡œê·¸ì¸ 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String login(String userid, String passwd,
 			RedirectAttributes redirectAttributes, HttpSession httpSession) {
@@ -39,10 +39,10 @@ public class LoginController {
 		redirectAttributes.addFlashAttribute("msg",map.get("msg"));
 		redirectAttributes.addFlashAttribute("userid",userid);
 		
-		// redirect : È­¸éÀÌµ¿ ÁÖ¼Ò ÀÌµ¿(@RequestMapping¿¡ ÀÇÇÑ ÀÌµ¿¸¸°¡´É)
-		// .jsp ·Î Á÷Á¢ ÀÌµ¿ÀÌ ºÒ°¡´É
+		// redirect : í™”ë©´ì´ë™ ì£¼ì†Œ ì´ë™(@RequestMappingì— ì˜í•œ ì´ë™ë§Œê°€ëŠ¥)
+		// .jsp ë¡œ ì§ì ‘ ì´ë™ì´ ë¶ˆê°€ëŠ¥
 		
-		// ·Î±×ÀÎ ¼º°øÇÑ °æ¿ì
+		// ë¡œê·¸ì¸ ì„±ê³µí•œ ê²½ìš°
 		if((int)map.get("result") == 0) {
 			httpSession.setAttribute("userid", userid);
 			httpSession.setMaxInactiveInterval(60*60);
@@ -52,18 +52,18 @@ public class LoginController {
 		return "redirect:/login/";
 	}
 	
-	// ¸ŞÀÎÀ¸·Î ÀÌµ¿
+	// ë©”ì¸ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/main")
 	public String main(@ModelAttribute("userid") String userid) {
 		logger.debug("main userid : "+userid);
 		return "Login/main";
 	}
 	
-	// ·Î±×¾Æ¿ôÃ³¸®
+	// ë¡œê·¸ì•„ì›ƒì²˜ë¦¬
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, RedirectAttributes attributes) {
-		session.invalidate(); //¼¼¼ÇÁ¤º¸ ¼Ò¸ê
-		String msg = "·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.";
+		session.invalidate(); //ì„¸ì…˜ì •ë³´ ì†Œë©¸
+		String msg = "ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		attributes.addFlashAttribute("msg",msg);
 		return "redirect:/login/";
 	}

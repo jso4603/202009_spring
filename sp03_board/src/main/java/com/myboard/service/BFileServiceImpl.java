@@ -23,28 +23,28 @@ import com.myboard.dto.BFileDTO;
 
 @Service
 public class BFileServiceImpl implements BFileService{
-	//servlet-context.xml¿¡ ÆÄÀÏ ÀúÀå µğ·ºÅä¸® ºó
+	//servlet-context.xmlì— íŒŒì¼ ì €ì¥ ë””ë ‰í† ë¦¬ ë¹ˆ
 	@Resource(name="saveDir")
 	String saveDir; 
 
 	@Resource
 	BFileDAO fdao;
 	
-	// ´ÙÁß ÆÄÀÏ ¾÷·ÎµåÇÏ°í ÆÄÀÏÀÌ¸§ ¸®½ºÆ® ¹İÈ¯
+	// ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œí•˜ê³  íŒŒì¼ì´ë¦„ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
 	@Override
 	public List<String> fileUpload(List<MultipartFile> files) throws Exception {
 		
 		List<String> list = new ArrayList<>();
 		for(MultipartFile mf: files) {
-			//ÆÄÀÏÀÌ¸§ »ı¼º
+			//íŒŒì¼ì´ë¦„ ìƒì„±
 			System.out.println(mf.getOriginalFilename());
-			if (mf.getOriginalFilename() != "") { //ÆÄÀÏ¸íÀÌ Á¸ÀçÇÒ¶§¸¸ ¹İº¹
+			if (mf.getOriginalFilename() != "") { //íŒŒì¼ëª…ì´ ì¡´ì¬í• ë•Œë§Œ ë°˜ë³µ
 				String filename = System.currentTimeMillis()+mf.getOriginalFilename();
-				//Àü¼ÛÇÒ ÆÄÀÏ°æ·Î¿Í ÀÌ¸§ »ı¼º
+				//ì „ì†¡í•  íŒŒì¼ê²½ë¡œì™€ ì´ë¦„ ìƒì„±
 				File f = new File(saveDir, filename);
 				try {
 					mf.transferTo(f);
-					list.add(filename); //ÆÄÀÏÀÌ¸§ Ãß°¡
+					list.add(filename); //íŒŒì¼ì´ë¦„ ì¶”ê°€
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -56,7 +56,7 @@ public class BFileServiceImpl implements BFileService{
 
 	}
 
-	//ÆÄÀÏ¸í ÀúÀå
+	//íŒŒì¼ëª… ì €ì¥
 	@Override
 	public int insert(int bnum, List<String> filenameList) throws Exception {
 		for(String filename : filenameList) {
@@ -69,7 +69,7 @@ public class BFileServiceImpl implements BFileService{
 		return 0;
 	}
 
-	//ÆÄÀÏ ¸®½ºÆ®
+	//íŒŒì¼ ë¦¬ìŠ¤íŠ¸
 	@Override
 	public List<BFileDTO> selectList(int bnum) throws Exception {
 		return fdao.selectList(bnum);
@@ -80,11 +80,11 @@ public class BFileServiceImpl implements BFileService{
 		return fdao.delete(bnum);
 	}
 	
-	//¼öÁ¤½Ã ÀÏºÎ ÆÄÀÏ »èÁ¦
+	//ìˆ˜ì •ì‹œ ì¼ë¶€ íŒŒì¼ ì‚­ì œ
 	@Override
 	public int delete_part(int bnum, List<Integer> fnumList) throws Exception{
 		String fnums = "";
-		//nullÃ³¸®
+		//nullì²˜ë¦¬
 		if (fnumList != null) {
 			fnums = fnumList.toString().replace("[", "").replace("]", "");
 		}
@@ -93,28 +93,28 @@ public class BFileServiceImpl implements BFileService{
 		return 0;
 	}
 
-	//ÆÄÀÏ ´Ù¿î·Îµå
+	//íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@Override
 	public void fileDownload(String filename, HttpServletResponse response) throws Exception{
 		String fileUrl = saveDir + "/" +filename;
 
 		try {
-			//ÆÄÀÏ ÀĞ±â ½ºÆ®¸² »ı¼º
+			//íŒŒì¼ ì½ê¸° ìŠ¤íŠ¸ë¦¼ ìƒì„±
 			FileInputStream fis = new FileInputStream(fileUrl);
 			
-			//ÇÑ±ÛÆÄÀÏÀÌ¸§ ÀÎÄÚµù
+			//í•œê¸€íŒŒì¼ì´ë¦„ ì¸ì½”ë”©
 			filename = URLEncoder.encode(filename, "utf-8");
 			//filename = new String(filename.getBytes("utf-8"), "iso-8859-1");
 			
-			//ÀÀ´ä°´Ã¼ÀÇ Çì´õ¼³Á¤ º¯°æ
-			//Ã·ºÎÆÄÀÏ ÇüÅÂ·Î º¯°æ
-			//ÆÄÀÏÀÌ¸§ ÁöÁ¤
+			//ì‘ë‹µê°ì²´ì˜ í—¤ë”ì„¤ì • ë³€ê²½
+			//ì²¨ë¶€íŒŒì¼ í˜•íƒœë¡œ ë³€ê²½
+			//íŒŒì¼ì´ë¦„ ì§€ì •
 			response.setHeader("Content-Disposition", "attachment;filename="+filename);
 			
 			
-			//ÆÄÀÏ ³»º¸³»±â ½ºÆ®¸²  »ı¼º
+			//íŒŒì¼ ë‚´ë³´ë‚´ê¸° ìŠ¤íŠ¸ë¦¼  ìƒì„±
 			OutputStream out = response.getOutputStream();
-			//inputstream¿¡¼­ µ¥ÀÌÅ¸¸¦ ÀĞ¾î¼­ outputstreamÀ¸·Î ³»º¸³¿
+			//inputstreamì—ì„œ ë°ì´íƒ€ë¥¼ ì½ì–´ì„œ outputstreamìœ¼ë¡œ ë‚´ë³´ëƒ„
 			FileCopyUtils.copy(fis, out);
 			
 		} catch (FileNotFoundException e) {

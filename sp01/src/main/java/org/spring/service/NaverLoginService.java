@@ -22,14 +22,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NaverLoginService {
-	// ÀÎÁõÄÚµå°ª ¿äÃ»
+	// ì¸ì¦ì½”ë“œê°’ ìš”ì²­
 	public Map<String,String> getLoginUrl() throws UnsupportedEncodingException {
-		String clientId = "WzjwRR2PM6wmnTqMnjkt";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ¾ÆÀÌµğ°ª";
-	    // Äİ¹é ÁÖ¼Ò
+		String clientId = "WzjwRR2PM6wmnTqMnjkt";//ì• í”Œë¦¬ì¼€ì´ì…˜ í´ë¼ì´ì–¸íŠ¸ ì•„ì´ë””ê°’";
+	    // ì½œë°± ì£¼ì†Œ
 	    String redirectURI = URLEncoder.encode("http://localhost:8081/sample/login/callback", "UTF-8");
 	    SecureRandom random = new SecureRandom();
-	    String state = new BigInteger(130, random).toString(); // Ã¼Å© °ª
-	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"; // ÀÎÁõÄÚµå°ª ¿äÃ»
+	    String state = new BigInteger(130, random).toString(); // ì²´í¬ ê°’
+	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"; // ì¸ì¦ì½”ë“œê°’ ìš”ì²­
 	    apiURL += "&client_id=" + clientId;
 	    apiURL += "&redirect_uri=" + redirectURI;
 	    apiURL += "&state=" + state;
@@ -41,10 +41,10 @@ public class NaverLoginService {
 	    return resultMap;
 	}
 	
-	// °³ÀÎÁ¤º¸Á¶È¸
+	// ê°œì¸ì •ë³´ì¡°íšŒ
 	public Map<String, String> getUserInfo(String code, String state) throws ParseException {
-		String token = getToken(code,state); // ³×ÀÌ¹ö ·Î±×ÀÎ Á¢±Ù ÅäÅ«;
-        String header = "Bearer " + token; // Bearer ´ÙÀ½¿¡ °ø¹é Ãß°¡
+		String token = getToken(code,state); // ë„¤ì´ë²„ ë¡œê·¸ì¸ ì ‘ê·¼ í† í°;
+        String header = "Bearer " + token; // Bearer ë‹¤ìŒì— ê³µë°± ì¶”ê°€
 
         String apiURL = "https://openapi.naver.com/v1/nid/me";
 
@@ -54,7 +54,7 @@ public class NaverLoginService {
 
         System.out.println(responseBody);
         
-        // ÆÄ½Ì : ¾ÆÀÌµğ, ÀÌ¸ŞÀÏ, ÀÌ¸§
+        // íŒŒì‹± : ì•„ì´ë””, ì´ë©”ì¼, ì´ë¦„
         JSONObject object = (JSONObject)new JSONParser().parse(responseBody);
         object = (JSONObject) object.get("response");
         String id = (String) object.get("id");
@@ -77,13 +77,13 @@ public class NaverLoginService {
             }
 
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // Á¤»ó È£Ãâ
+            if (responseCode == HttpURLConnection.HTTP_OK) { // ì •ìƒ í˜¸ì¶œ
                 return readBody(con.getInputStream());
-            } else { // ¿¡·¯ ¹ß»ı
+            } else { // ì—ëŸ¬ ë°œìƒ
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {
-            throw new RuntimeException("API ¿äÃ»°ú ÀÀ´ä ½ÇÆĞ", e);
+            throw new RuntimeException("API ìš”ì²­ê³¼ ì‘ë‹µ ì‹¤íŒ¨", e);
         } finally {
             con.disconnect();
         }
@@ -94,9 +94,9 @@ public class NaverLoginService {
             URL url = new URL(apiUrl);
             return (HttpURLConnection)url.openConnection();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("API URLÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("API URLì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
         } catch (IOException e) {
-            throw new RuntimeException("¿¬°áÀÌ ½ÇÆĞÇß½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("ì—°ê²°ì´ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
         }
     }
 
@@ -113,18 +113,18 @@ public class NaverLoginService {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API ÀÀ´äÀ» ÀĞ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.", e);
+            throw new RuntimeException("API ì‘ë‹µì„ ì½ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.", e);
         }
     }
 	
-	// ÅäÅ«¿äÃ»
+	// í† í°ìš”ì²­
 	public String getToken(String code, String state) {
-		String clientId = "WzjwRR2PM6wmnTqMnjkt";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ¾ÆÀÌµğ°ª";
-	    String clientSecret = "DUvw1gdi1F";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ½ÃÅ©¸´°ª";
-	    //code = (String)request.getAttribute("code"); //ÀÎÁõ ÄÚµå°ª
-	    //state = (String)request.getAttribute("state"); // ¿äÃ»pc¿¡¼­ »ı¼ºÇÑ °ª
+		String clientId = "WzjwRR2PM6wmnTqMnjkt";//ì• í”Œë¦¬ì¼€ì´ì…˜ í´ë¼ì´ì–¸íŠ¸ ì•„ì´ë””ê°’";
+	    String clientSecret = "DUvw1gdi1F";//ì• í”Œë¦¬ì¼€ì´ì…˜ í´ë¼ì´ì–¸íŠ¸ ì‹œí¬ë¦¿ê°’";
+	    //code = (String)request.getAttribute("code"); //ì¸ì¦ ì½”ë“œê°’
+	    //state = (String)request.getAttribute("state"); // ìš”ì²­pcì—ì„œ ìƒì„±í•œ ê°’
 	    String apiURL;
-	    // Åä±Ù : ³×ÀÌ¹öÀÇ Á¤º¸¸¦ ¾ò±â À§ÇÑ °ª
+	    // í† ê·¼ : ë„¤ì´ë²„ì˜ ì •ë³´ë¥¼ ì–»ê¸° ìœ„í•œ ê°’
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;
@@ -140,9 +140,9 @@ public class NaverLoginService {
 	      int responseCode = con.getResponseCode();
 	      BufferedReader br;
 	      System.out.print("responseCode="+responseCode);
-	      if(responseCode==200) { // Á¤»ó È£Ãâ
+	      if(responseCode==200) { // ì •ìƒ í˜¸ì¶œ
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	      } else {  // ¿¡·¯ ¹ß»ı
+	      } else {  // ì—ëŸ¬ ë°œìƒ
 	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 	      }
 	      String inputLine;
@@ -153,7 +153,7 @@ public class NaverLoginService {
 	      br.close();
 	      if(responseCode==200) {
 	        System.out.println(res.toString());
-	        // ÅäÅ« °ª ÆÄ½Ì
+	        // í† í° ê°’ íŒŒì‹±
 	        JSONObject object = (JSONObject)new JSONParser().parse(res.toString());
 	        access_token = (String)object.get("access_token");
 	        System.out.println(access_token);

@@ -28,31 +28,31 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public List<BoardDTO> selectList(PageDTO pdto) throws Exception {
-		//------pdto ±¸ÇÏ±â----------
-		//ÀüÃ¼°Ô½Ã¹°¼ö
+		//------pdto êµ¬í•˜ê¸°----------
+		//ì „ì²´ê²Œì‹œë¬¼ìˆ˜
 		int totCnt = bdao.totolCount(pdto);
-		//ÀüÃ¼ÆäÀÌÁö¼ö
+		//ì „ì²´í˜ì´ì§€ìˆ˜
 		int totPage = totCnt / pdto.getPerPage();
 		if ((totCnt % pdto.getPerPage()) != 0 ) totPage = totPage + 1;
 		pdto.setTotPage(totPage);
 		
-		//ÇöÀçÆäÀÌÁö
+		//í˜„ì¬í˜ì´ì§€
 		int curPage = pdto.getCurPage();
-		//½ÃÀÛ¹øÈ£(mysql¿¡¼­ 0¹øºÎÅÍ ½ÃÀÛ)
+		//ì‹œì‘ë²ˆí˜¸(mysqlì—ì„œ 0ë²ˆë¶€í„° ì‹œì‘)
 		int startNo = (curPage-1) * pdto.getPerPage();
 		pdto.setStartNo(startNo);
-		//³¡¹øÈ£
+		//ëë²ˆí˜¸
 		int endNo = startNo + pdto.getPerPage() -1;
 		pdto.setEndNo(endNo);
-		//½ÃÀÛÆäÀÌÁö
+		//ì‹œì‘í˜ì´ì§€
 		int startPage = curPage - ((curPage-1) % pdto.getPerBlock());
 		pdto.setStartPage(startPage);
-		//³¡ÆäÀÌÁö
+		//ëí˜ì´ì§€
 		int endPage = startPage + pdto.getPerBlock()-1;
 		if (endPage > totPage) endPage = totPage;
 		pdto.setEndPage(endPage);
 		
-		// ÀüÃ¼Á¶È¸
+		// ì „ì²´ì¡°íšŒ
 		return bdao.selectList(pdto);
 	}
 
@@ -60,26 +60,26 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> selectOne(int bnum) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		
-		// °Ô½Ã¹° ÇÑ°ÇÁ¶È¸
+		// ê²Œì‹œë¬¼ í•œê±´ì¡°íšŒ
 		map.put("board", bdao.selectOne(bnum));
-		//ÆÄÀÏ ¸®½ºÆ® Á¶È¸
+		//íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 		map.put("flist",fservice.selectList(bnum));
 		
 		return map;
 		
 	}
 	
-	//Æ®·£Àè¼Ç Ã³¸®
+	//íŠ¸ëœì­ì…˜ ì²˜ë¦¬
 	@Transactional
 	@Override
 	public int insert(BoardDTO bdto, List<MultipartFile> bfiles) throws Exception {
-		// °Ô½Ã¹° Ãß°¡
+		// ê²Œì‹œë¬¼ ì¶”ê°€
 		bdao.insert(bdto);
-		int bnum = bdto.getBnum(); //°Ô½Ã¹° ¹øÈ£
+		int bnum = bdto.getBnum(); //ê²Œì‹œë¬¼ ë²ˆí˜¸
 		
-		//ÆÄÀÏ ÀúÀå
+		//íŒŒì¼ ì €ì¥
 		List<String> filenameList = fservice.fileUpload(bfiles);
-		//ÆÄÀÏ Ãß°¡
+		//íŒŒì¼ ì¶”ê°€
 		fservice.insert(bnum, filenameList);
 		
 		return bnum;
@@ -87,16 +87,16 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int update(BoardDTO bdto, List<Integer> fnumList,List<MultipartFile> bfiles) throws Exception {
-		// °Ô½Ã¹° ¼öÁ¤
+		// ê²Œì‹œë¬¼ ìˆ˜ì •
 		bdao.update(bdto);
 		int bnum = bdto.getBnum();
-		//ÆÄÀÏ »èÁ¦
+		//íŒŒì¼ ì‚­ì œ
 		fservice.delete_part(bnum,fnumList);
 		
 		
-		//ÆÄÀÏ ÀúÀå
+		//íŒŒì¼ ì €ì¥
 		List<String> filenameList = fservice.fileUpload(bfiles);
-		//ÆÄÀÏ Ãß°¡
+		//íŒŒì¼ ì¶”ê°€
 		fservice.insert(bnum, filenameList);
 		return 0;
 	}
@@ -104,14 +104,14 @@ public class BoardServiceImpl implements BoardService{
 	@Transactional
 	@Override
 	public int delete(int bnum) throws Exception {
-		//ÁÖÀÇ : ÀÚ½ÄÅ×ÀÌºí »èÁ¦ÈÄ ºÎ¸ğÅ×ÀÌºí »èÁ¦(foreign key°ü°è)
-		// ´ñ±Û »èÁ¦
+		//ì£¼ì˜ : ìì‹í…Œì´ë¸” ì‚­ì œí›„ ë¶€ëª¨í…Œì´ë¸” ì‚­ì œ(foreign keyê´€ê³„)
+		// ëŒ“ê¸€ ì‚­ì œ
 		rservice.delete_bnum(bnum);
 		
-		// ÆÄÀÏ »èÁ¦
+		// íŒŒì¼ ì‚­ì œ
 		fservice.delete(bnum);
 		
-		// °Ô½Ã¹° »èÁ¦
+		// ê²Œì‹œë¬¼ ì‚­ì œ
 		bdao.delete(bnum);
 
 		return 0;
@@ -119,19 +119,19 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int readcnt_update(int bnum) throws Exception {
-		// Á¶È¸¼ö +1
+		// ì¡°íšŒìˆ˜ +1
 		return bdao.readcnt_update(bnum);
 	}
 
 	@Override
 	public int replycntUp_update(int bnum) throws Exception {
-		// ´ñ±Û¼ö +1
+		// ëŒ“ê¸€ìˆ˜ +1
 		return bdao.replycntUp_update(bnum);
 	}
 
 	@Override
 	public int replycntDown_update(int bnum) throws Exception {
-		// ´ñ±Û¼ö -1
+		// ëŒ“ê¸€ìˆ˜ -1
 		return bdao.replycntDown_update(bnum);
 	}
 

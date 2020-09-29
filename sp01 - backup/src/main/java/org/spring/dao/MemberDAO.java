@@ -10,16 +10,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDAO {
-	//ÀÇÁ¸ ÁÖÀÔ
+	//ì˜ì¡´ ì£¼ì…
 	@Inject
 	private SqlSession session;
 	
-	//ÀüÃ¼Á¶È¸
+	//ì „ì²´ì¡°íšŒ
 	public List<MemberDTO> selectList(){
 		return session.selectList("memberMapper.selectList");
 	}
 	
-	//ÇÑ °Ç Ãß°¡
+	//í•œ ê±´ ì¶”ê°€
 	public int insert(MemberDTO dto) {
 		return session.insert("memberMapper.insert",dto);
 	}

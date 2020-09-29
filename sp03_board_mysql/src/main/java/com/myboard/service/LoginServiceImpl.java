@@ -24,26 +24,26 @@ public class LoginServiceImpl implements LoginService {
 	@Resource
 	private MemberDAO mdao;
 
-	// ·Î±×ÀÎ Ã¼Å©
+	// ë¡œê·¸ì¸ ì²´í¬
 		@Transactional
 		@Override
 		public Map<String, Object> loginCheck(String userid, String passwd) throws Exception {
 			String msg = null;
-			//result : 0(·Î±×ÀÎ¼º°ø),1(¾ÆÀÌµğ¹ÌÁ¸Àç),2(ÆĞ½º¿öµåºÒÀÏÄ¡)
+			//result : 0(ë¡œê·¸ì¸ì„±ê³µ),1(ì•„ì´ë””ë¯¸ì¡´ì¬),2(íŒ¨ìŠ¤ì›Œë“œë¶ˆì¼ì¹˜)
 			int result = -1;
 			
 			MemberDTO mdto = mdao.selectOne(userid);		
 			logger.debug("loginCheck id/pw : "+userid+"/"+passwd);
 
 			if(mdto == null) {
-				msg = "Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù.";
+				msg = "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.";
 				result = 1;	
 			}else {
 				if(encoder.matches(passwd, mdto.getPasswd())){
-					msg = "·Î±×ÀÎ ¼º°ø";
+					msg = "ë¡œê·¸ì¸ ì„±ê³µ";
 					result = 0;
 				} else {
-					msg = "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.";
+					msg = "ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.";
 					result = 2;
 				}
 			}

@@ -1,0 +1,21 @@
+package com.myboard.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myboard.service.ChatService;
+
+@Controller
+@RequestMapping("chat")
+public class ChatController {
+	
+	@Resource
+	private ChatService cservice;
+	
+	@RequestMapping("/")
+	public void chatTest() {
+		
+	}
+}

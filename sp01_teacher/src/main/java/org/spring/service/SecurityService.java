@@ -12,23 +12,23 @@ public class SecurityService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 	
-	//root-context.xml¿¡¼­ ½ºÇÁ¸µÀÌ ¸¸µç °´Ã¼¸¦ ÀÚµ¿ÁÖÀÔ 
+	//root-context.xmlì—ì„œ ìŠ¤í”„ë§ì´ ë§Œë“  ê°ì²´ë¥¼ ìë™ì£¼ì… 
 	@Resource 
 	private BCryptPasswordEncoder encoder;
 	
-	//¾ÏÈ£È­ Å×½ºÆ®
+	//ì•”í˜¸í™” í…ŒìŠ¤íŠ¸
 	public void securityTestMethod(String passwd) {
 		String encodePw = encoder.encode(passwd);
 		logger.info(encodePw);
-		logger.info("±æÀÌ:" + encodePw.length());
+		logger.info("ê¸¸ì´:" + encodePw.length());
 	}
-	//¾ÏÈ£ÀÏÄ¡¿©ºÎ Å×½ºÆ®
+	//ì•”í˜¸ì¼ì¹˜ì—¬ë¶€ í…ŒìŠ¤íŠ¸
 	public void pwCheckTestMethod(String passwd) {
 		String mypw = "$2a$10$DaTNxpj.MDoQC90oe5mWieyV55LqM2avFLJQzr8qH0W8PeSq5pr2K";
 //		String mypw = "$2a$10$NwQxCIpJHSw5PpQgGCSBMOfwjcokDiCCjiP/9V.NOaqTMcYF2ZKo6";
-		//¾ÏÈ­È­µÈ ÆĞ½º¿öµå ÀÏÄ¡ ¿©ºÎ
+		//ì•”í™”í™”ëœ íŒ¨ìŠ¤ì›Œë“œ ì¼ì¹˜ ì—¬ë¶€
 		boolean matchB =  encoder.matches(passwd, mypw);
-		logger.info("ÀÏÄ¡¿©ºÎ:"+ matchB);
+		logger.info("ì¼ì¹˜ì—¬ë¶€:"+ matchB);
 
 	}
 	

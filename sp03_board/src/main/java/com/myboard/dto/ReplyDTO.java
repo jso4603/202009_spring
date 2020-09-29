@@ -5,12 +5,12 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReplyDTO {
-	private int rnum; //´ñ±Û¹øÈ£
-	private int bnum; //°Ô½Ã¹°¹øÈ£
-	private String content; //³»¿ë
-	private String writer; //ÀÛ¼ºÀÚ
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul") // Æ÷¸ËÇü½ÄÁö
-	private Date regdate; //µî·ÏÀÏÀÚ
+	private int rnum; //ëŒ“ê¸€ë²ˆí˜¸
+	private int bnum; //ê²Œì‹œë¬¼ë²ˆí˜¸
+	private String content; //ë‚´ìš©
+	private String writer; //ì‘ì„±ì
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul") // í¬ë§·í˜•ì‹ì§€
+	private Date regdate; //ë“±ë¡ì¼ì
 	public ReplyDTO() {
 		super();
 	}

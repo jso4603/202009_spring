@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.myboard.dto.ReplyDTO;
 
-//´ä±Û
+//ë‹µê¸€
 public interface ReplyService {
 	public int insert(ReplyDTO rdto) throws Exception;
 	public int update(ReplyDTO rdto) throws Exception;
 	public int delete(int rnum, int bnum) throws Exception;
 	public List<ReplyDTO> selectList(int bnum) throws Exception;
 	public ReplyDTO selectOne(int rnum) throws Exception;
-	public int delete_bnum(int bnum) throws Exception; //°Ô½Ã¹°ÀÇ ÇØ´çÇÏ´Â ´ñ±Û »èÁ¦
+	public int delete_bnum(int bnum) throws Exception; //ê²Œì‹œë¬¼ì˜ í•´ë‹¹í•˜ëŠ” ëŒ“ê¸€ ì‚­ì œ
 }	

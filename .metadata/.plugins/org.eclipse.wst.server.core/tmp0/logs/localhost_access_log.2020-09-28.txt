@@ -1,0 +1,14 @@
+127.0.0.1 - - [28/Sep/2020:16:48:28 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:48:45 +0900] "GET /spring_mysql/board/ HTTP/1.1" 200 2719
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:48:46 +0900] "GET /favicon.ico HTTP/1.1" 404 818
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:48:50 +0900] "GET /spring_mysql/member/join HTTP/1.1" 200 3396
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:41:55 +0900] "GET /spring_mysql/board/ HTTP/1.1" 200 2719
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:41:57 +0900] "GET /spring_mysql/login/ HTTP/1.1" 200 1587
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:42:01 +0900] "POST /spring_mysql/login/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:42:02 +0900] "GET /spring_mysql/board/list HTTP/1.1" 200 3301
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:42:25 +0900] "GET /spring_mysql/member/modify?userid=%EA%B4%80%EB%A6%AC%EC%9E%90 HTTP/1.1" 200 4104
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:42:25 +0900] "GET /images/1601198431128 HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:43:10 +0900] "POST /spring_mysql/member/moveChangePW HTTP/1.1" 200 1551
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:43:13 +0900] "GET /spring_mysql/member/modify?userid=%EA%B4%80%EB%A6%AC%EC%9E%90 HTTP/1.1" 200 4104
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:43:16 +0900] "POST /spring_mysql/member/deletePW HTTP/1.1" 200 1508
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:20:43:18 +0900] "GET /spring_mysql/member/modify?userid=%EA%B4%80%EB%A6%AC%EC%9E%90 HTTP/1.1" 200 4104

@@ -14,7 +14,7 @@ import com.myboard.dao.BoardDAO;
 import com.myboard.dto.BoardDTO;
 import com.myboard.dto.PageDTO;
 
-/*½ºÇÁ¸µ Å×½ºÆ®*/
+/*ìŠ¤í”„ë§ í…ŒìŠ¤íŠ¸*/
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class bdaoTest {
@@ -48,11 +48,11 @@ public class bdaoTest {
 	@Test
 	public void testInsert() throws Exception {
 		BoardDTO bdto = new BoardDTO();
-		bdto.setWriter("È«±æµ¿");
+		bdto.setWriter("í™ê¸¸ë™");
 		bdto.setEmail("hong@gmail.com");
-		bdto.setSubject("Á¦¸ñ");
-		bdto.setContent("³»¿ë");
-		//bdao.insert(bdto) ÀÇ °á°ú°ªÀÌ 1°ú °°À¸¸é ¼º°ø
+		bdto.setSubject("ì œëª©");
+		bdto.setContent("ë‚´ìš©");
+		//bdao.insert(bdto) ì˜ ê²°ê³¼ê°’ì´ 1ê³¼ ê°™ìœ¼ë©´ ì„±ê³µ
 		Assert.assertEquals(1, bdao.insert(bdto));
 	}
 
@@ -60,10 +60,10 @@ public class bdaoTest {
 	public void testUpdate() throws Exception {
 		BoardDTO bdto = new BoardDTO();
 		bdto.setBnum(3);
-		bdto.setWriter("È«±æµ¿");
+		bdto.setWriter("í™ê¸¸ë™");
 		bdto.setEmail("hong@gmail.com");
-		bdto.setSubject("Á¦¸ñ¼öÁ¤");
-		bdto.setContent("³»¿ë¼öÁ¤");
+		bdto.setSubject("ì œëª©ìˆ˜ì •");
+		bdto.setContent("ë‚´ìš©ìˆ˜ì •");
 		Assert.assertEquals(1, bdao.update(bdto));
 	}
 

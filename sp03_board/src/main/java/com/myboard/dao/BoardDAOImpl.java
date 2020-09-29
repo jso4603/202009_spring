@@ -16,50 +16,50 @@ public class BoardDAOImpl implements BoardDAO{
 	@Resource
 	private SqlSession session;
 
-	//ÀüÃ¼ °Ç¼ö
+	//ì „ì²´ ê±´ìˆ˜
 	@Override
 	public int totolCount(PageDTO pdto) throws Exception {
 		return session.selectOne("boardMapper.totCount", pdto);
 	}
 
-	//ÀüÃ¼ Á¶È¸
+	//ì „ì²´ ì¡°íšŒ
 	@Override
 	public List<BoardDTO> selectList(PageDTO pdto) throws Exception {
 		return session.selectList("boardMapper.selectList", pdto);
 	}
-	//ÇÑ°ÇÁ¶È¸
+	//í•œê±´ì¡°íšŒ
 	@Override
 	public BoardDTO selectOne(int bnum) throws Exception {
 		return session.selectOne("boardMapper.selectOne", bnum);
 	}
 
-	//Ãß°¡
+	//ì¶”ê°€
 	@Override
 	public int insert(BoardDTO bdto) throws Exception {
 		return session.insert("boardMapper.insert",bdto );
 	}
-	//¼öÁ¤
+	//ìˆ˜ì •
 	@Override
 	public int update(BoardDTO bdto) throws Exception {
 		return session.update("boardMapper.update",bdto);
 	}
-	//»èÁ¦
+	//ì‚­ì œ
 	@Override
 	public int delete(int bnum) throws Exception {
 		return session.delete("boardMapper.delete",bnum);
 	}
-	//Á¶È¸¼ö +1
+	//ì¡°íšŒìˆ˜ +1
 	@Override
 	public int readcnt_update(int bnum) throws Exception {
 		return session.update("boardMapper.readcnt_update", bnum);
 	}
-	//´ñ±Û¼ö +1 
+	//ëŒ“ê¸€ìˆ˜ +1 
 	@Override
 	public int replycntUp_update(int bnum) throws Exception {
 		return session.update("boardMapper.replycntUp_update", bnum);
 	}
 
-	//´ñ±Û¼ö -1 
+	//ëŒ“ê¸€ìˆ˜ -1 
 	@Override
 	public int replycntDown_update(int bnum) throws Exception {
 		return session.update("boardMapper.replycntDown_update", bnum);

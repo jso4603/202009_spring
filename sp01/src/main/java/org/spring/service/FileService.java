@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
-// Ãß»ó¸Ş¼Òµå¸¸ µé¾î°¨(±¸ÇöºÎ´Â ¾ø°í ¸Ş¼Òµå¿¡ ´ëÇÑ Á¤ÀÇ¸¸ ÀÖ´Â °Í)
+// ì¶”ìƒë©”ì†Œë“œë§Œ ë“¤ì–´ê°(êµ¬í˜„ë¶€ëŠ” ì—†ê³  ë©”ì†Œë“œì— ëŒ€í•œ ì •ì˜ë§Œ ìˆëŠ” ê²ƒ)
 public interface FileService {
 	
-	// ÆÄÀÏ ¾÷·Îµå
+	// íŒŒì¼ ì—…ë¡œë“œ
 	public Map<String, Object> fileUpload(String name, MultipartFile myfile);
-	// ´ÙÁß ÆÄÀÏ ¾÷·Îµå
+	// ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ
 	public List<Map<String, Object>> fileUploads(String name, List<MultipartFile> myfiles);
-	// ÆÄÀÏ ´Ù¿î·Îµå
+	// íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	public void fileDownload(String filename,HttpServletResponse response);
 	
 }

@@ -16,11 +16,11 @@ public class BankService {
 	@Resource
 	private BankBDAO bdao;
 	
-	//aop¸¦ ÀÌ¿ëÇÑ Æ®·£Àè¼Ç °ü¸®
-	//Æ®·£Àè¼Ç : ÀÛ¾÷ÀÇ ´ÜÀ§¸¦ ¹­¾î¼­ commitµÇ°Å³ª rollbackÀÌ °°ÀÌ µÇ°Ô ÇÑ´Ù
+	//aopë¥¼ ì´ìš©í•œ íŠ¸ëœì­ì…˜ ê´€ë¦¬
+	//íŠ¸ëœì­ì…˜ : ì‘ì—…ì˜ ë‹¨ìœ„ë¥¼ ë¬¶ì–´ì„œ commitë˜ê±°ë‚˜ rollbackì´ ê°™ì´ ë˜ê²Œ í•œë‹¤
 	@Transactional
 	public void insert(int money) {
-		//mondy ÀÌÃ¼±İ¾× : AÅëÀå¿¡¼­ BÅëÀåÀ¸·Î ÀÌÃ¼
+		//mondy ì´ì²´ê¸ˆì•¡ : Aí†µì¥ì—ì„œ Bí†µì¥ìœ¼ë¡œ ì´ì²´
 		adao.insert(new BankDTO(0,0,money)); 
 		bdao.insert(new BankDTO(0,money,0));
 	}

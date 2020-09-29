@@ -11,27 +11,27 @@ public class MemberDAOImpl implements MemberDAO {
 	@Resource
 	private SqlSession session;
 
-	// ¾ÆÀÌµğ¸¦ ÀÌ¿ëÇÏ¿© ÇÑ °Ç Á¶È¸
+	// ì•„ì´ë””ë¥¼ ì´ìš©í•˜ì—¬ í•œ ê±´ ì¡°íšŒ
 	public MemberDTO selectOne(String userid) {
 		return session.selectOne("memberMapper.selectOne",userid);
 	}
 
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public void insert(MemberDTO dto) {
 		session.insert("memberMapper.insert",dto);
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤
+	// íšŒì› ì •ë³´ ìˆ˜ì •
 	public void update(MemberDTO dto) {
 		session.update("memberMapper.update",dto);
 	}
 
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	public void delete(String userid) {
 		session.delete("memberMapper.delete",userid);
 	}
 
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	public void changePW(MemberDTO dto) {
 		session.update("memberMapper.changePW",dto);
 	}

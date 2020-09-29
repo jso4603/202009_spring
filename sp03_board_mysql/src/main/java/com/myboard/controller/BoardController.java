@@ -33,54 +33,54 @@ public class BoardController {
 	@Resource 
 	private BFileService fservice;
 	
-	//¸ŞÀÎ ÆûÀ¸·Î ÀÌµ¿
+	//ë©”ì¸ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping("/")
 	public String listMove(PageDTO pdto, Model model) throws Exception {
-		//@SessionAttributes("pdto") »ı¼º
+		//@SessionAttributes("pdto") ìƒì„±
 		model.addAttribute("pdto", pdto);
 		return "board/main";
 	}
 	
-	//Á¶È¸
-	//@ModelAttribute("pdto") : view±îÁö Á¤º¸ Àü´Ş
-	//@ModelAttribute ´Â @SessionAttributesÀÇ °ª ¼¼ÆÃ
+	//ì¡°íšŒ
+	//@ModelAttribute("pdto") : viewê¹Œì§€ ì •ë³´ ì „ë‹¬
+	//@ModelAttribute ëŠ” @SessionAttributesì˜ ê°’ ì„¸íŒ…
 	@RequestMapping("/list")
 	public void boardList(@ModelAttribute("pdto") PageDTO pdto, Model model) throws Exception {
 		List<BoardDTO> blist = bservice.selectList(pdto);
 		model.addAttribute("blist", blist);
 	}
 	
-	//Ãß°¡ÆûÀ¸·Î
+	//ì¶”ê°€í¼ìœ¼ë¡œ
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public void boardAdd() throws Exception {}
 	
-	//Ãß°¡
+	//ì¶”ê°€
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public String boardAdd(BoardDTO bdto, List<MultipartFile> bfiles,RedirectAttributes rattr) throws Exception {
 		bservice.insert(bdto, bfiles);
-		rattr.addFlashAttribute("msg", "Ãß°¡¿Ï·á");
+		rattr.addFlashAttribute("msg", "ì¶”ê°€ì™„ë£Œ");
 		return "redirect:/board/list";		
 	}
 	
-	//ÇÑ°ÇÁ¶È¸ÈÄ »ó¼¼ÆäÀÌÁö·Î ÀÌµ¿
+	//í•œê±´ì¡°íšŒí›„ ìƒì„¸í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping("/detail")
 	public void boardDetail(int bnum, Model model) throws Exception {
-		//Á¶È¸¼ö +1
+		//ì¡°íšŒìˆ˜ +1
 		bservice.readcnt_update(bnum);
 
 		Map<String, Object> resultMap = bservice.selectOne(bnum);
 		model.addAttribute("board", resultMap.get("board"));
 		model.addAttribute("flist", resultMap.get("flist"));
 	}
-	//»èÁ¦
+	//ì‚­ì œ
 	@RequestMapping("/delete")
 	public String boardDelete(int bnum, Model model, RedirectAttributes rattr) throws Exception {
 		bservice.delete(bnum);
-		rattr.addFlashAttribute("msg", "»èÁ¦¿Ï·á");
+		rattr.addFlashAttribute("msg", "ì‚­ì œì™„ë£Œ");
 		return "redirect:/board/list";
 	}
 	
-	//¼öÁ¤ÆûÀ¸·Î
+	//ìˆ˜ì •í¼ìœ¼ë¡œ
 	@RequestMapping(value="/modify", method = RequestMethod.GET)
 	public void boardModify(int bnum, Model model) throws Exception {
 		Map<String, Object> resultMap = bservice.selectOne(bnum);
@@ -88,28 +88,28 @@ public class BoardController {
 		model.addAttribute("flist", resultMap.get("flist"));
 	}
 	
-	//¼öÁ¤
+	//ìˆ˜ì •
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
 	public String boardModify(BoardDTO bdto,
 			@RequestParam(value="fnum", required = false) List<Integer> fnumList,
 			List<MultipartFile> bfiles,
 			RedirectAttributes rattr) throws Exception {
 		bservice.update(bdto,fnumList,bfiles );
-		rattr.addFlashAttribute("msg", "¼öÁ¤¿Ï·á");
+		rattr.addFlashAttribute("msg", "ìˆ˜ì •ì™„ë£Œ");
 		rattr.addAttribute("bnum", bdto.getBnum());
 		return "redirect:/board/list";
 	}
 	
-	//ÆÄÀÏ ´Ù¿î·Îµå
+	//íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@RequestMapping("/filedownload")
 	public void fileDownload(String filename, HttpServletResponse response) throws Exception {
 		fservice.fileDownload(filename, response);
 	}
 	
-	//¼¼¼Ç »èÁ¦(@SessionAttributes("pdto"))
+	//ì„¸ì…˜ ì‚­ì œ(@SessionAttributes("pdto"))
 	@RequestMapping("/sessionDelete")
 	public String sessionDelete(SessionStatus status) throws Exception {
-		//¼¼¼ÇÀ» Áö¿î´Ù
+		//ì„¸ì…˜ì„ ì§€ìš´ë‹¤
 		status.setComplete();
 		return "redirect:/board/";
 	}

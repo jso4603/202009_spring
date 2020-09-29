@@ -7,16 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface MemberService {
 	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public Map<String,Object> insert(MemberDTO dto,MultipartFile photofile);
-	//¼öÁ¤ Æû¿¡ °¡Á®°¥ µ¥ÀÌÅÍ
+	//ìˆ˜ì • í¼ì— ê°€ì ¸ê°ˆ ë°ì´í„°
 	public MemberDTO modify(String userid);
-	// È¸¿øÁ¤º¸ ¼öÁ¤
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	public String update(MemberDTO dto,MultipartFile photofile);
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	public String delete(MemberDTO dto,String insertPW);
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	public String changePW(MemberDTO dto,String oldPW,String newPW);
-	// ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ È®ÀÎ
+	// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€ í™•ì¸
 	public boolean checkPW(String passwd, String insertPW);
 }

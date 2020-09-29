@@ -19,7 +19,7 @@ public class NaverLoginController {
 	@Resource
 	private NaverLoginService nservice;
 	
-	// ³×ÀÌ¹ö·Î±×ÀÎ ÀÎÁõÄÚµå ¿äÃ»
+	// ë„¤ì´ë²„ë¡œê·¸ì¸ ì¸ì¦ì½”ë“œ ìš”ì²­
 	@RequestMapping("/naverLogin")
 	public String naverLogin(Model model,HttpSession session) throws UnsupportedEncodingException {
 		Map<String,String> map = nservice.getLoginUrl();
@@ -28,17 +28,17 @@ public class NaverLoginController {
 		model.addAttribute("apiURL",map.get("apiURL"));
 		return "15_naverLogin/01_naverlogin";
 	}
-	// ³×ÀÌ¹ö ·Î±×ÀÎ ÀÎÁõÄÚµå Äİ¹é ¸ÅÇÎ
-	// code : ÀÎÁõÄÚµå, state : ¼¼¼Ç¿¡ ÀúÀå µÈ °ª(Å¬¶óÀÌ¾ğÆ®ÀÎÁõÀ§ÇÔ)
+	// ë„¤ì´ë²„ ë¡œê·¸ì¸ ì¸ì¦ì½”ë“œ ì½œë°± ë§¤í•‘
+	// code : ì¸ì¦ì½”ë“œ, state : ì„¸ì…˜ì— ì €ì¥ ëœ ê°’(í´ë¼ì´ì–¸íŠ¸ì¸ì¦ìœ„í•¨)
 	@RequestMapping("/callback")
 	public String callback(String code,String state,Model model,HttpSession session) throws ParseException {
-		// ¼¼¼ÇÀÇ state°ª°ú ³Ñ°Ü¹ŞÀº state°ª ÀÏÄ¡
+		// ì„¸ì…˜ì˜ stateê°’ê³¼ ë„˜ê²¨ë°›ì€ stateê°’ ì¼ì¹˜
 		String saveState = (String)session.getAttribute("state");
 		if(saveState.equals(state)) {
-			Map<String, String> resultMap = nservice.getUserInfo(code,state); // °³ÀÎ Á¤º¸¸¦ ¿äÃ»ÇÒ ¼ö ÀÖ´Â ÅäÅ«°ª ¿äÃ»
+			Map<String, String> resultMap = nservice.getUserInfo(code,state); // ê°œì¸ ì •ë³´ë¥¼ ìš”ì²­í•  ìˆ˜ ìˆëŠ” í† í°ê°’ ìš”ì²­
 			model.addAttribute("resultMap",resultMap);
 		} else {
-			System.out.println("ÀÎÁõ¿¡·¯");
+			System.out.println("ì¸ì¦ì—ëŸ¬");
 		}
 		
 		

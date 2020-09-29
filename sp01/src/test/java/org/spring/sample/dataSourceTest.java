@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-//½ºÇÁ¸µ Å×½ºÆ®¸¦ À§ÇÑ ¼³Á¤
+//ìŠ¤í”„ë§ í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•œ ì„¤ì •
 @RunWith(SpringJUnit4ClassRunner.class)
-// @ContextConfiguration : ¾î¶² xmlÀ» °¡Á®¿Ã°ÇÁö
+// @ContextConfiguration : ì–´ë–¤ xmlì„ ê°€ì ¸ì˜¬ê±´ì§€
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class dataSourceTest {
 	
@@ -24,7 +24,7 @@ public class dataSourceTest {
 	
 	@Test
 	public void test() {
-		//µ¥ÀÌÅÍ ¼Ò½º Å×½ºÆ®
+		//ë°ì´í„° ì†ŒìŠ¤ í…ŒìŠ¤íŠ¸
 		try {
 			Connection con = ds.getConnection();
 			System.out.println("con : "+con);

@@ -3,6 +3,6 @@ package com.myboard.service;
 import java.util.Map;
 
 public interface LoginService {
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	public Map<String, Object> loginCheck(String userid, String passwd) throws Exception;
 }

@@ -4,12 +4,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-// ÄÁÆ®·Ñ·¯¿¡¼­ ¹ß»ıÇÏ´Â ¿¹¿Ü¸¦ Àü¹®ÀûÀ¸·Î Ã³¸®ÇÏ´Â Å¬·¡½º
+// ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë°œìƒí•˜ëŠ” ì˜ˆì™¸ë¥¼ ì „ë¬¸ì ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 @ControllerAdvice
 public class CommonExceptionAdvice {
 	@ExceptionHandler
 	public String common(Exception e,Model model) {
-		System.out.println("¿¹¿Ü¹ß»ı");
+		System.out.println("ì˜ˆì™¸ë°œìƒ");
 		System.out.println(e.toString());
 		e.printStackTrace();
 		model.addAttribute("exception",e);

@@ -3,6 +3,6 @@ package org.spring.service;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
-	// ÆÄÀÏ ÀúÀåÇÏ°í ÆÄÀÏ¸íÀ» ¸®ÅÏÇÏ´Â ¸Ş¼Òµå
+	// íŒŒì¼ ì €ì¥í•˜ê³  íŒŒì¼ëª…ì„ ë¦¬í„´í•˜ëŠ” ë©”ì†Œë“œ
 	public String fileUpload(MultipartFile file);
 }

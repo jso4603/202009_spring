@@ -11,21 +11,21 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileServiceImpl implements FileService {
 
-	// ÀúÀå µğ·ºÅä¸®
-	// servlet-context.xml¿¡ ÆÄÀÏ ÀúÀå µğ·ºÅä¸® ºó
+	// ì €ì¥ ë””ë ‰í† ë¦¬
+	// servlet-context.xmlì— íŒŒì¼ ì €ì¥ ë””ë ‰í† ë¦¬ ë¹ˆ
 	@Resource(name="saveDir")
 	String saveDir;
 	
 	@Override
 	public String fileUpload(MultipartFile file) {
-		// ÆÄÀÏ ÀÌ¸§
+		// íŒŒì¼ ì´ë¦„
 		String filename = null;
 		
 		try {
-			// ÆÄÀÏÀÌ¸§ÀÌ °ãÄ¡Áö ¾Ê°Ô »ı¼º
+			// íŒŒì¼ì´ë¦„ì´ ê²¹ì¹˜ì§€ ì•Šê²Œ ìƒì„±
 			filename = System.currentTimeMillis() + file.getOriginalFilename();
-			File f = new File(saveDir,filename); // ÀúÀåÇÒ ÆÄÀÏ »ı¼º
-			file.transferTo(f); // f ÀÇ °æ·Î¿¡ ÆÄÀÏ ÀúÀå
+			File f = new File(saveDir,filename); // ì €ì¥í•  íŒŒì¼ ìƒì„±
+			file.transferTo(f); // f ì˜ ê²½ë¡œì— íŒŒì¼ ì €ì¥
 		} catch (IllegalStateException e) {
 			filename = null;	
 			e.printStackTrace();

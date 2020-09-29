@@ -24,28 +24,28 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileServiceImpl implements FileService {
 	private static final Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 	
-	//servlet-context.xml¿¡ ÆÄÀÏ ÀúÀå µğ·ºÅä¸® ºó
+	//servlet-context.xmlì— íŒŒì¼ ì €ì¥ ë””ë ‰í† ë¦¬ ë¹ˆ
 	@Resource(name="saveDir")
 	String saveDir; 
 	
 	@Override
 	public Map<String, Object> fileUpload(String name, MultipartFile myfile) {
-		//ÆÄÀÏ ¾÷·Îµå Ã³¸®
+		//íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 //		logger.info(myfile.getOriginalFilename());
 //		logger.info(myfile.getContentType());
 //		logger.info(myfile.getName());
-//		logger.info("»çÀÌÁî:" + myfile.getSize());
-		//¾÷·ÎµåÇÒ Æú´õ
+//		logger.info("ì‚¬ì´ì¦ˆ:" + myfile.getSize());
+		//ì—…ë¡œë“œí•  í´ë”
 //		logger.info(saveDir);
-		//ÆÄÀÏÀÌ¸§ÀÌ °ãÄ¡Áö ¾Ê°Ô »ı¼º
+		//íŒŒì¼ì´ë¦„ì´ ê²¹ì¹˜ì§€ ì•Šê²Œ ìƒì„±
 		String filename = System.currentTimeMillis() + myfile.getOriginalFilename();
 //		System.out.println(filename);
 		
-		File savefile = new File(saveDir,filename); //ÆÄÀÏ °´Ã¼»ı¼º
+		File savefile = new File(saveDir,filename); //íŒŒì¼ ê°ì²´ìƒì„±
 		Map<String, Object> resultMap = null;
 		try {
-			myfile.transferTo(savefile); //savefileÀÇ °æ·Î¿¡ ÆÄÀÏÀúÀå
-			//ÆÄÀÏ Á¤º¸ ¹İÈ¯
+			myfile.transferTo(savefile); //savefileì˜ ê²½ë¡œì— íŒŒì¼ì €ì¥
+			//íŒŒì¼ ì •ë³´ ë°˜í™˜
 			resultMap = new HashMap<>();
 			resultMap.put("savefile", saveDir +"\\" + filename);
 			resultMap.put("filesize", myfile.getSize());
@@ -62,15 +62,15 @@ public class FileServiceImpl implements FileService {
 		
 	}
 
-	//´ÙÁß ÆÄÀÏ ¾÷·Îµå
+	//ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ
 	@Override
 	public List<Map<String, Object>> fileUploads(String name, List<MultipartFile> myfiles) {
 		List<Map<String,Object>> list = new ArrayList<>();
 		for(MultipartFile mf: myfiles) {
 			Map<String, Object> map = new HashMap<>();
-			//ÆÄÀÏÀÌ¸§ »ı¼º
+			//íŒŒì¼ì´ë¦„ ìƒì„±
 			String filename = System.currentTimeMillis()+mf.getOriginalFilename();
-			//Àü¼ÛÇÒ ÆÄÀÏ°æ·Î¿Í ÀÌ¸§ »ı¼º
+			//ì „ì†¡í•  íŒŒì¼ê²½ë¡œì™€ ì´ë¦„ ìƒì„±
 			File f = new File(saveDir, filename);
 
 			try {
@@ -89,29 +89,29 @@ public class FileServiceImpl implements FileService {
 		return list;
 	}
 
-	//ÆÄÀÏ ´Ù¿î·Îµå
+	//íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@Override
 	public void fileDownload(String filename, HttpServletResponse response) {
 		String fileUrl = saveDir + "/" +filename;
 		logger.info(fileUrl);
 
 		try {
-			//ÆÄÀÏ ÀĞ±â ½ºÆ®¸² »ı¼º
+			//íŒŒì¼ ì½ê¸° ìŠ¤íŠ¸ë¦¼ ìƒì„±
 			FileInputStream fis = new FileInputStream(fileUrl);
 			
-			//ÇÑ±ÛÆÄÀÏÀÌ¸§ ÀÎÄÚµù
+			//í•œê¸€íŒŒì¼ì´ë¦„ ì¸ì½”ë”©
 			filename = URLEncoder.encode(filename, "utf-8");
 			//filename = new String(filename.getBytes("utf-8"), "iso-8859-1");
 			
-			//ÀÀ´ä°´Ã¼ÀÇ Çì´õ¼³Á¤ º¯°æ
-			//Ã·ºÎÆÄÀÏ ÇüÅÂ·Î º¯°æ
-			//ÆÄÀÏÀÌ¸§ ÁöÁ¤
+			//ì‘ë‹µê°ì²´ì˜ í—¤ë”ì„¤ì • ë³€ê²½
+			//ì²¨ë¶€íŒŒì¼ í˜•íƒœë¡œ ë³€ê²½
+			//íŒŒì¼ì´ë¦„ ì§€ì •
 			response.setHeader("Content-Disposition", "attachment;filename="+filename);
 			
 			
-			//ÆÄÀÏ ³»º¸³»±â ½ºÆ®¸²  »ı¼º
+			//íŒŒì¼ ë‚´ë³´ë‚´ê¸° ìŠ¤íŠ¸ë¦¼  ìƒì„±
 			OutputStream out = response.getOutputStream();
-			//inputstream¿¡¼­ µ¥ÀÌÅ¸¸¦ ÀĞ¾î¼­ outputstreamÀ¸·Î ³»º¸³¿
+			//inputstreamì—ì„œ ë°ì´íƒ€ë¥¼ ì½ì–´ì„œ outputstreamìœ¼ë¡œ ë‚´ë³´ëƒ„
 			FileCopyUtils.copy(fis, out);
 			
 		} catch (FileNotFoundException e) {

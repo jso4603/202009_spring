@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BankBDAO {
 	
-	//¸¶ÀÌ¹ÙÆ¼½º ¼¼¼Ç ÀÚµ¿ÁÖÀÔ
+	//ë§ˆì´ë°”í‹°ìŠ¤ ì„¸ì…˜ ìë™ì£¼ì…
 	@Resource
 	private SqlSession session;
 	

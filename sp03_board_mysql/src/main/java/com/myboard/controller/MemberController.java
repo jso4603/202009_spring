@@ -33,7 +33,7 @@ public class MemberController {
 	@Resource
 	private NaverLoginService nservice;
 	
-	// È¸¿ø°¡ÀÔ ÆûÀ¸·Î ÀÌµ¿
+	// íšŒì›ê°€ì… í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		Map<String,String> map = nservice.getLoginUrl();
@@ -43,24 +43,24 @@ public class MemberController {
 		return "member/join";
 	}
 	
-	// ³×ÀÌ¹ö ·Î±×ÀÎ ÀÎÁõÄÚµå Äİ¹é ¸ÅÇÎ
-	// code : ÀÎÁõÄÚµå, state : ¼¼¼Ç¿¡ ÀúÀå µÈ °ª(Å¬¶óÀÌ¾ğÆ®ÀÎÁõÀ§ÇÔ)
+	// ë„¤ì´ë²„ ë¡œê·¸ì¸ ì¸ì¦ì½”ë“œ ì½œë°± ë§¤í•‘
+	// code : ì¸ì¦ì½”ë“œ, state : ì„¸ì…˜ì— ì €ì¥ ëœ ê°’(í´ë¼ì´ì–¸íŠ¸ì¸ì¦ìœ„í•¨)
 	@RequestMapping("/callback")
 	public String callback(String code,String state,Model model,HttpSession session) throws Exception {
-		// ¼¼¼ÇÀÇ state°ª°ú ³Ñ°Ü¹ŞÀº state°ª ÀÏÄ¡
+		// ì„¸ì…˜ì˜ stateê°’ê³¼ ë„˜ê²¨ë°›ì€ stateê°’ ì¼ì¹˜
 		String saveState = (String)session.getAttribute("state");
 		if(saveState.equals(state)) {
-			Map<String, String> resultMap = nservice.getUserInfo(code,state); // °³ÀÎ Á¤º¸¸¦ ¿äÃ»ÇÒ ¼ö ÀÖ´Â ÅäÅ«°ª ¿äÃ»
+			Map<String, String> resultMap = nservice.getUserInfo(code,state); // ê°œì¸ ì •ë³´ë¥¼ ìš”ì²­í•  ìˆ˜ ìˆëŠ” í† í°ê°’ ìš”ì²­
 			model.addAttribute("resultMap",resultMap);
 		} else {
-			System.out.println("ÀÎÁõ¿¡·¯");
+			System.out.println("ì¸ì¦ì—ëŸ¬");
 		}
 		
 		
 		return "member/join";
 	}
 	
-	// È¸¿ø°¡ÀÔ db¿¡ ÀúÀå ÈÄ login.jsp·Î ÀÌµ¿
+	// íšŒì›ê°€ì… dbì— ì €ì¥ í›„ login.jspë¡œ ì´ë™
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(MemberDTO mdto, MultipartFile photofile,
 			RedirectAttributes attributes) throws Exception {
@@ -68,13 +68,13 @@ public class MemberController {
 		Map<String, Object> map = mservice.insert(mdto,photofile);
 		
 		attributes.addFlashAttribute("msg",map.get("msg"));
-		// È¸¿ø°¡ÀÔ ¼º°ø
+		// íšŒì›ê°€ì… ì„±ê³µ
 		if((int)map.get("result") == 0) return "redirect:/member/login";
-		// È¸¿ø°¡ÀÔ ½ÇÆĞ
+		// íšŒì›ê°€ì… ì‹¤íŒ¨
 		return "redirect:/member/join";
 	}
 	
-	// ¸¶ÀÌÆäÀÌÁö ÆûÀ¸·Î ÀÌµ¿
+	// ë§ˆì´í˜ì´ì§€ í¼ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value ="/modify", method = RequestMethod.GET)
 	public String modify(@ModelAttribute("userid") String userid,
 			@ModelAttribute("msg") String msg, Model model) throws Exception {
@@ -84,7 +84,7 @@ public class MemberController {
 		return "member/modify";
 	}
 	
-	// È¸¿øÁ¤º¸ ¼öÁ¤
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	@RequestMapping(value ="/modify", method = RequestMethod.POST)
 	public String modify(MemberDTO mdto, MultipartFile photofile,
 			RedirectAttributes attributes) throws Exception {
@@ -95,7 +95,7 @@ public class MemberController {
 		return "redirect:/member/modify";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ È®ÀÎÈ­¸éÀ¸·Î ÀÌµ¿
+	// ë¹„ë°€ë²ˆí˜¸ í™•ì¸í™”ë©´ìœ¼ë¡œ ì´ë™
 	@RequestMapping(value = "/checkPW", method = RequestMethod.GET)
 	public String checkPW(@ModelAttribute("msg") String msg
 			,Model model) throws Exception {
@@ -103,7 +103,7 @@ public class MemberController {
 		return "member/checkPW";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ È®ÀÎ
+	// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€ í™•ì¸
 	@RequestMapping(value = "/checkPW", method = RequestMethod.POST)
 	public String checkPW(String passwd, String insertPW,
 			RedirectAttributes attributes) throws Exception {
@@ -112,22 +112,22 @@ public class MemberController {
 
 		boolean b = mservice.checkPW(passwd,insertPW);
 
-		if(b) msg = "ºñ¹Ğ¹øÈ£ ÀÏÄ¡";
-		else msg = "ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡";
+		if(b) msg = "ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜";
+		else msg = "ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜";
 		
 		attributes.addFlashAttribute("msg",msg);
 		
 		return "redirect:/member/checkPW";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ º¯°æÈ­¸éÀ¸·Î ÀÌµ¿
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½í™”ë©´ìœ¼ë¡œ ì´ë™
 	@RequestMapping("/moveChangePW")
 	public String moveChangePW(MemberDTO dto,Model model) throws Exception {
 		model.addAttribute("dto",dto);
 		return "member/changePW";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	@RequestMapping("/changePW")
 	public String changePW(MemberDTO dto, String oldPW, String newPW,
 			RedirectAttributes attributes) throws Exception {
@@ -138,14 +138,14 @@ public class MemberController {
 		return "redirect:/member/modify";
 	}
 	
-	// »èÁ¦ºñ¹Ğ¹øÈ£ È®ÀÎÈ­¸éÀ¸·Î ÀÌµ¿
+	// ì‚­ì œë¹„ë°€ë²ˆí˜¸ í™•ì¸í™”ë©´ìœ¼ë¡œ ì´ë™
 	@RequestMapping("/deletePW")
 	public String deletePW(MemberDTO dto,Model model) {
 		model.addAttribute("dto",dto);
 		return "member/deletePW";
 	}
 	
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@RequestMapping("/delete")
 	public String delete(MemberDTO dto, String insertPW,
 			RedirectAttributes attributes) throws Exception {
@@ -153,7 +153,7 @@ public class MemberController {
 		String msg = mservice.delete(dto,insertPW);
 		attributes.addFlashAttribute("msg",msg);
 		
-		if(msg =="ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.") {
+		if(msg =="ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.") {
 			attributes.addFlashAttribute("userid",dto.getUserid());
 			return "redirect:/member/modify";
 		} 

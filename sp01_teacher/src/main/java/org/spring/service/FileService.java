@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
-	//Ãß»ó¸Ş¼Òµå
-	//ÇÏ³ªÀÇ ÆÄÀÏÀ» ¾÷·Îµå
+	//ì¶”ìƒë©”ì†Œë“œ
+	//í•˜ë‚˜ì˜ íŒŒì¼ì„ ì—…ë¡œë“œ
 	public Map<String, Object> fileUpload(String name, MultipartFile myfile);
-	//´ÙÁß ÆÄÀÏ ¾÷·Îµå
+	//ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ
 	public List<Map<String,Object>> fileUploads(String name, List<MultipartFile> myfiles);
 	
-	//ÆÄÀÏ´Ù¿î·Îµå
+	//íŒŒì¼ë‹¤ìš´ë¡œë“œ
 	public void fileDownload(String filename, HttpServletResponse response);
 	
 }

@@ -1,9 +1,0 @@
-package com.myboard.service;
-
-import com.myboard.dto.MemberDTO;
-
-public interface MemberService {
-	// È¸¿ø Ãß
-	public void insert(MemberDTO mdto) throws Exception;
-
-}

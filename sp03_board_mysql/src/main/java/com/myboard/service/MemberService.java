@@ -7,16 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.myboard.dto.MemberDTO;
 
 public interface MemberService {
-	// È¸¿ø °¡ÀÔ
+	// íšŒì› ê°€ì…
 	public Map<String,Object> insert(MemberDTO mdto, MultipartFile photofile) throws Exception;
-	//¼öÁ¤ Æû¿¡ µ¥ÀÌÅÍ Àü¼Û
+	//ìˆ˜ì • í¼ì— ë°ì´í„° ì „ì†¡
 	public MemberDTO modify(String userid) throws Exception;
-	// È¸¿ø Á¤º¸¼öÁ¤
+	// íšŒì› ì •ë³´ìˆ˜ì •
 	public String update(MemberDTO mdto, MultipartFile photofile) throws Exception;
-	// ºñ¹Ğ¹øÈ£ ÀÏÄ¡¿©ºÎ È®ÀÎ
+	// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ì—¬ë¶€ í™•ì¸
 	public boolean checkPW(String passwd, String insertPW) throws Exception;
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	public String changePW(MemberDTO dto, String oldPW, String newPW) throws Exception;
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	public String delete(MemberDTO dto, String insertPW) throws Exception;
 }

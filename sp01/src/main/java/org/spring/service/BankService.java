@@ -17,10 +17,10 @@ public class BankService {
 	@Resource
 	private BankBDAO bdao;
 	
-	// aop¸¦ ÀÌ¿ëÇÑ Æ®·£Àè¼Ç °ü¸®
+	// aopë¥¼ ì´ìš©í•œ íŠ¸ëœì­ì…˜ ê´€ë¦¬
 	@Transactional
 	public void insert(int money) {
-		// money : ÀÌÃ¼±İ¾×(AÅëÀå¿¡¼­ BÅëÀåÀ¸·Î ÀÌÃ¼)
+		// money : ì´ì²´ê¸ˆì•¡(Aí†µì¥ì—ì„œ Bí†µì¥ìœ¼ë¡œ ì´ì²´)
 		adao.insert(new BankDTO(0,0,money));
 		bdao.insert(new BankDTO(0,money,0));
 	}

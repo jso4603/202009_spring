@@ -34,30 +34,30 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		// WEB-INF/view/home.jsp·Î °¡¶ó
+		// WEB-INF/view/home.jspë¡œ ê°€ë¼
 		return "home";
 	}
 	
-	//01_voidTest.jsp È£Ãâ
+	//01_voidTest.jsp í˜¸ì¶œ
 	@RequestMapping(value = "/01_voidTest")
 	public void voidMapping() {
-		logger.info("void¸Ş¼Òµå È£Ãâ");
+		logger.info("voidë©”ì†Œë“œ í˜¸ì¶œ");
 	}
 	
-	//02_stringTest.jsp È£Ãâ
-	//value °ª ÇÏ³ª¸¸ ³ÖÀ¸¸é value »ı·« °¡´É
+	//02_stringTest.jsp í˜¸ì¶œ
+	//value ê°’ í•˜ë‚˜ë§Œ ë„£ìœ¼ë©´ value ìƒëµ ê°€ëŠ¥
 	@RequestMapping("stringTest")
 	public String stringMapping() {
-		logger.info("string ¸Ş¼Òµå È£Ãâ");
-		//return : °¡¾ß µÉ °÷(jsp forwardÃ³·³)
+		logger.info("string ë©”ì†Œë“œ í˜¸ì¶œ");
+		//return : ê°€ì•¼ ë  ê³³(jsp forwardì²˜ëŸ¼)
 		// WEB-INF/views/02_stringTest.jsp
-		// servlet-context.xml¿¡ prefix,suffix °¡ Á¤ÀÇµÇ¾î ÀÖ¾î »ı·« °¡´É
+		// servlet-context.xmlì— prefix,suffix ê°€ ì •ì˜ë˜ì–´ ìˆì–´ ìƒëµ ê°€ëŠ¥
 		return "02_stringTest";
 	}
 	
-	//03_paramTest.jsp È£Ãâ
+	//03_paramTest.jsp í˜¸ì¶œ
 	@RequestMapping("paramTest")
-	//defaultValue : °ªÀÌ ¾øÀ» ¶§ µğÆúÆ®°ª ÁöÁ¤
+	//defaultValue : ê°’ì´ ì—†ì„ ë•Œ ë””í´íŠ¸ê°’ ì§€ì •
 	public String paramTest(@RequestParam String name, 
 			@RequestParam(defaultValue = "20") int age, Model model) {
 		
@@ -69,7 +69,7 @@ public class HomeController {
 		return "03_paramTest";
 	}
 	
-	//½Ç½À)loginÅ×½ºÆ®
+	//ì‹¤ìŠµ)loginí…ŒìŠ¤íŠ¸
 	@RequestMapping("login")
 	public String loginTest() {
 		
@@ -89,7 +89,7 @@ public class HomeController {
 	}
 	
 	//04_modelTest.jsp
-	//ÆÄ¶ó¹ÌÅÍ¸¦ view±îÁö Àü´Ş
+	//íŒŒë¼ë¯¸í„°ë¥¼ viewê¹Œì§€ ì „ë‹¬
 	@RequestMapping("04_modelTest")
 	public void modelTest(@ModelAttribute("userid") String userid,
 			@ModelAttribute("passwd") String passwd) {
@@ -97,20 +97,20 @@ public class HomeController {
 		logger.info("passwd : "+passwd);
 	}
 	
-	//05_dtoTest.jsp ÆäÀÌÁö¸¦ ¶ç¿ì±â À§ÇÑ ¸Ş¼Òµå
+	//05_dtoTest.jsp í˜ì´ì§€ë¥¼ ë„ìš°ê¸° ìœ„í•œ ë©”ì†Œë“œ
 	@RequestMapping("05_dtoTest")
 	public void dtoTest() {
 		
 	}
 	
-	//05_dtoTest.jsp - DTO Çü½ÄÀ¸·Î º¸³¿
+	//05_dtoTest.jsp - DTO í˜•ì‹ìœ¼ë¡œ ë³´ëƒ„
 	@RequestMapping("dtoTest")
 	public String dtoTest(@ModelAttribute("dto") MemberDTO dto) {
 			logger.info(dto.toString());
 			return "05_dtoTest";
 	}
 	
-	//05_dtoTest.jsp - MAP Çü½ÄÀ¸·Î º¸³¿
+	//05_dtoTest.jsp - MAP í˜•ì‹ìœ¼ë¡œ ë³´ëƒ„
 	@RequestMapping("dtoTest_map")
 	public String dtoTest(@RequestParam HashMap<String,String> map, Model model) {
 			logger.info(map.toString());
@@ -118,23 +118,23 @@ public class HomeController {
 			return "05_dtoTest";
 	}
 	
-	//¸®´ÙÀÌ·ºÆ® Å×½ºÆ®
+	//ë¦¬ë‹¤ì´ë ‰íŠ¸ í…ŒìŠ¤íŠ¸
 	@RequestMapping("redirectTest")
 	public String redirectTest() {
-		logger.info("¸®´ÙÀÌ·ºÆ® Å×½ºÆ®");
+		logger.info("ë¦¬ë‹¤ì´ë ‰íŠ¸ í…ŒìŠ¤íŠ¸");
 		
 		return "redirect:06_redirect";
 	}
 	
-	//06_redirect.jsp ÆäÀÌÁö¸¦ ¶ç¿ì±â À§ÇÑ ¸Ş¼Òµå
+	//06_redirect.jsp í˜ì´ì§€ë¥¼ ë„ìš°ê¸° ìœ„í•œ ë©”ì†Œë“œ
 	@RequestMapping("06_redirect")
 	public void redirect() {
 		
 	}
 	
-	//½Ç½À
-	//·Î±×ÀÎ ¼º°ø ½Ã ¸ŞÀÎ ÆûÀ¸·Î ÀÌµ¿(redirect)
-	//·Î±×ÀÎ ½ÇÆĞ ½Ã ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿(forward)
+	//ì‹¤ìŠµ
+	//ë¡œê·¸ì¸ ì„±ê³µ ì‹œ ë©”ì¸ í¼ìœ¼ë¡œ ì´ë™(redirect)
+	//ë¡œê·¸ì¸ ì‹¤íŒ¨ ì‹œ ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™(forward)
 	
 	// WEB-INF/views/06_Test/login.jsp
 	@RequestMapping("06_Test/login")
@@ -146,21 +146,21 @@ public class HomeController {
 		String myid = "java";
 		String mypw = "1111";
 		
-		//post¹æ½ÄÀ¸·Î º¸³½ µ¥ÀÌÅÍ°¡ ÇÑ±ÛÀÏ ¶§
-		//web.xml¿¡¼­ ÇÑ±ÛÀ» Ã³¸®ÇØ Áà¾ß ±úÁöÁö ¾Ê°í Ãâ·ÂÀÌ µÊ
+		//postë°©ì‹ìœ¼ë¡œ ë³´ë‚¸ ë°ì´í„°ê°€ í•œê¸€ì¼ ë•Œ
+		//web.xmlì—ì„œ í•œê¸€ì„ ì²˜ë¦¬í•´ ì¤˜ì•¼ ê¹¨ì§€ì§€ ì•Šê³  ì¶œë ¥ì´ ë¨
 		logger.info("userid/passwd : "+userid+"/"+passwd);
 		
 		if(myid.equals(userid) && mypw.equals(passwd)) {
-			//¼¼¼Ç¿¡ userid ÀúÀå
+			//ì„¸ì…˜ì— userid ì €ì¥
 			httpSession.setAttribute("userid", userid);
 			httpSession.setAttribute("passwd", passwd);
-			httpSession.setMaxInactiveInterval(60*10); //ÃÊ´ÜÀ§(10ºĞ)
+			httpSession.setMaxInactiveInterval(60*10); //ì´ˆë‹¨ìœ„(10ë¶„)
 			
-			//¸®´ÙÀÌ·ºÆ® ¼Ó¼º°ªÀ¸·Î °ª Àü´Ş
-			//addFlashAttribute : url¿¡¼­ ÇÑ¹ø »ç¿ë ÈÄ Á¤º¸»èÁ¦
+			//ë¦¬ë‹¤ì´ë ‰íŠ¸ ì†ì„±ê°’ìœ¼ë¡œ ê°’ ì „ë‹¬
+			//addFlashAttribute : urlì—ì„œ í•œë²ˆ ì‚¬ìš© í›„ ì •ë³´ì‚­ì œ
 			redirectAttributes.addFlashAttribute("userid",userid);
 			redirectAttributes.addFlashAttribute("passwd",passwd);
-			redirectAttributes.addFlashAttribute("msg","·Î±×ÀÎ¿Ï·á");
+			redirectAttributes.addFlashAttribute("msg","ë¡œê·¸ì¸ì™„ë£Œ");
 			
 
 			return "redirect:06_main";
@@ -169,7 +169,7 @@ public class HomeController {
 		}
 	}
 	
-	//@ModelAttribute : view±îÁö µ¥ÀÌÅÍ Àü´Ş
+	//@ModelAttribute : viewê¹Œì§€ ë°ì´í„° ì „ë‹¬
 	@RequestMapping("06_main")
 	public String mainview(@ModelAttribute("userid") String userid,
 			@ModelAttribute("passwd") String passwd,
@@ -178,8 +178,8 @@ public class HomeController {
 		return "06_Test/main";
 	}
 	
-	//json : {"userid":"È«±æµ¿","passwd":"1111", "email":"hong@gmail.com"}
-	//¶óÀÌºê·¯¸®(Jackson Databind) : json µ¥ÀÌÅÍ·Î º¯È¯ ¶óÀÌºê·¯¸® Ãß°¡
+	//json : {"userid":"í™ê¸¸ë™","passwd":"1111", "email":"hong@gmail.com"}
+	//ë¼ì´ë¸ŒëŸ¬ë¦¬(Jackson Databind) : json ë°ì´í„°ë¡œ ë³€í™˜ ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€
 	@RequestMapping(value = "jsonTest", method = RequestMethod.GET)
 	public String jsonTestCall() {
 		return "07_jsonTest";
@@ -187,46 +187,46 @@ public class HomeController {
 	
 	@RequestMapping(value = "jsonTest", method = RequestMethod.POST)
 	public @ResponseBody MemberDTO jsonTest(MemberDTO dto) {
-		dto.setUserid("È«±æµ¿");
+		dto.setUserid("í™ê¸¸ë™");
 		dto.setPasswd("1111");
 		dto.setEmail("hong@gmail.com");
 		logger.info(dto.toString());
 		return dto;
 	}
 	
-	//¸Ş¼Òµå Å×½ºÆ® È­¸éÀ¸·Î ÀÌµ¿
+	//ë©”ì†Œë“œ í…ŒìŠ¤íŠ¸ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@RequestMapping("08_methodTest")
 	public void methodTestCall() {}
 	
 	@RequestMapping(value = "methodTest", method = RequestMethod.GET)
 	public String methodTestGet(String name, int age) {
-		logger.info("GET¹æ½Ä name/age : "+name+"/"+age);
+		logger.info("GETë°©ì‹ name/age : "+name+"/"+age);
 		
 		return "08_methodTest";
 	}
 	
 	@RequestMapping(value = "methodTest", method = RequestMethod.POST)
 	public String methodTestPost(String name, int age) {
-		logger.info("POST¹æ½Ä name/age : "+name+"/"+age);
+		logger.info("POSTë°©ì‹ name/age : "+name+"/"+age);
 		
 		return "08_methodTest";
 	}
 	
-	//joinÆûÀ¸·Î ÀÌµ¿ : GET¹æ½Ä
+	//joiní¼ìœ¼ë¡œ ì´ë™ : GETë°©ì‹
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String joinTest() {
 		
 		return "08_Test/join";
 	}
 	
-	//join µ¥ÀÌÅÍ Ãâ·Â
+	//join ë°ì´í„° ì¶œë ¥
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String joinTest(MemberDTO dto,Model model) {
 		logger.info(dto.toString());
 		model.addAttribute("userid",dto.getUserid());
 		model.addAttribute("passwd",dto.getPasswd());
 		model.addAttribute("email",dto.getEmail());
-		model.addAttribute("msg","È¸¿ø°¡ÀÔ ¿Ï·á");
+		model.addAttribute("msg","íšŒì›ê°€ì… ì™„ë£Œ");
 		
 		return "08_Test/main";
 	}

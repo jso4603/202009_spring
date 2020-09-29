@@ -39,22 +39,22 @@ public class HomeController {
 		return "home";
 	}
 	
-	//01_voidTest.jsp È£Ãâ
+	//01_voidTest.jsp í˜¸ì¶œ
 	@RequestMapping(value = "01_voidTest")
 	public void voidMapping() {
-		logger.info("void¸Ş¼Òµå È£Ãâ");
+		logger.info("voidë©”ì†Œë“œ í˜¸ì¶œ");
 	}
 	
-	//02_stringTest.jsp È£Ãâ
+	//02_stringTest.jsp í˜¸ì¶œ
 	@RequestMapping("stringTest")
 	public String stringMapping() {
-		logger.info("string ¸Ş¼Òµå È£Ãâ");
-		//servlet-context.xml¿¡ prefix, suffix Á¤ÀÇ
+		logger.info("string ë©”ì†Œë“œ í˜¸ì¶œ");
+		//servlet-context.xmlì— prefix, suffix ì •ì˜
 		/* /WEB-INF/views/02_stringTest.jsp */
 		return "02_stringTest";
 	}
 	
-	//03_paramTest.jsp È£Ãâ
+	//03_paramTest.jsp í˜¸ì¶œ
 	@RequestMapping("paramTest")
 	public String paramTest(@RequestParam("nicName") String name, 
 				@RequestParam(defaultValue = "20") int age , Model model) {
@@ -65,7 +65,7 @@ public class HomeController {
 		return "03_paramTest";
 	}
 	
-	//½Ç½À)loginÅ×½ºÆ®
+	//ì‹¤ìŠµ)loginí…ŒìŠ¤íŠ¸
 	@RequestMapping("login")
 	public String loginTest() {
 		return "03_Test/login";
@@ -79,7 +79,7 @@ public class HomeController {
 	}
 	
 	//04_ModelTest.jsp
-	//ÆÄ¶ó¸ŞÅÍ¸¦ view±îÁö Àü´Ş
+	//íŒŒë¼ë©”í„°ë¥¼ viewê¹Œì§€ ì „ë‹¬
 	@RequestMapping("04_ModelTest")
 	public void modelTest(@ModelAttribute("userid") String userid, 
 			@ModelAttribute("passwd") String passwd) {
@@ -87,18 +87,18 @@ public class HomeController {
 		logger.info("passwd:" + passwd);
 	}
 	
-	//05_DtoTest.jspÈ£Ãâ
+	//05_DtoTest.jspí˜¸ì¶œ
 	/* /WEB-INF/views/05_DtoTest.jsp */
 	@RequestMapping("05_DtoTest")
 	public void dtoTest() {}
 	
-	//dtoÀü´Ş¹Ş¾Æ¼­ 05_DtoTest.jspÈ£Ãâ
+	//dtoì „ë‹¬ë°›ì•„ì„œ 05_DtoTest.jspí˜¸ì¶œ
 	@RequestMapping("dtoTest")
 	public String dtoTest(@ModelAttribute("dto") MemberDTO dto) {
 		logger.info(dto.toString() );
 		return "05_DtoTest";
 	}
-	//¸ÊÀ¸·Î Àü´Ş ¹Ş±â
+	//ë§µìœ¼ë¡œ ì „ë‹¬ ë°›ê¸°
 	@RequestMapping("dtoTest_map")
 	public String dtoTest(@RequestParam HashMap<String,String> map, Model model) {
 		logger.info(map.toString() );
@@ -106,24 +106,24 @@ public class HomeController {
 		return "05_DtoTest";
 	}
 	
-	//¸®´ÙÀÌ·ºÆ® Å×½ºÆ®
+	//ë¦¬ë‹¤ì´ë ‰íŠ¸ í…ŒìŠ¤íŠ¸
 	@RequestMapping("redirectTest")
 	public String redirectTest() {
-		logger.info("¸®´ÙÀÌ·ºÆ® Å×½ºÆ®");
+		logger.info("ë¦¬ë‹¤ì´ë ‰íŠ¸ í…ŒìŠ¤íŠ¸");
 		return "redirect:06_redirect";
 	}
 	@RequestMapping("06_redirect")
 	public void redirect() {}
 	
-	//½Ç½À
-	//·Î±×ÀÎ ¼º°øÇÏ¸é ¸ŞÀÎ ÆûÀ¸·Î °¡±â (redirect)
-	//¾Æ´Ï¸é ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿ (forward)
+	//ì‹¤ìŠµ
+	//ë¡œê·¸ì¸ ì„±ê³µí•˜ë©´ ë©”ì¸ í¼ìœ¼ë¡œ ê°€ê¸° (redirect)
+	//ì•„ë‹ˆë©´ ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™ (forward)
 	
 	/* /WEB-INF/views/06_test/login.jsp */
 	@RequestMapping("06_Test/login")
 	public void redirctLogin() {}
 	
-	//@ModelAttribute : view±îÁö µ¥ÀÌÅÍ Àü´Ş
+	//@ModelAttribute : viewê¹Œì§€ ë°ì´í„° ì „ë‹¬
 	@RequestMapping("06_Test/main")
 	public void redirctMain(@ModelAttribute("userid") String userid,
 			@ModelAttribute("passwd") String passwd, 
@@ -137,15 +137,15 @@ public class HomeController {
 		String mypw = "1111";
 		logger.info(userid + " " + passwd);
 		if (userid.equals(myid) && passwd.equals(mypw) ) {
-			//¼¼¼Ç¿¡ userid ÀúÀå
+			//ì„¸ì…˜ì— userid ì €ì¥
 			session.setAttribute("userid", userid);
-			session.setMaxInactiveInterval(60*10); //10ºĞ
+			session.setMaxInactiveInterval(60*10); //10ë¶„
 			
-			//¸®´ÙÀÌ·ºÆ® ¼Ó¼º°ªÀ¸·Î °ª Àü´Ş
+			//ë¦¬ë‹¤ì´ë ‰íŠ¸ ì†ì„±ê°’ìœ¼ë¡œ ê°’ ì „ë‹¬
 			rdAttr.addAttribute("userid", userid);
 			rdAttr.addAttribute("passwd", passwd);
-			//url¿¡¼­ ÇÑ¹ø»ç¿ëÈÄ Á¤º¸»èÁ¦
-			rdAttr.addFlashAttribute("msg","·Î±×ÀÎ ¿Ï·á");
+			//urlì—ì„œ í•œë²ˆì‚¬ìš©í›„ ì •ë³´ì‚­ì œ
+			rdAttr.addFlashAttribute("msg","ë¡œê·¸ì¸ ì™„ë£Œ");
 			return "redirect:06_Test/main";
 		}else {
 			return "redirect:06_Test/login";
@@ -154,7 +154,7 @@ public class HomeController {
 	
 	
 	//json : {"userid":"java", "passwd":"1111", "email":"hong@gmail.com"}
-	//¶óÀÌºê·¯¸® : jackson-databind : jsonµ¥ÀÌÅÍ·Î º¯È¯ ¶óÀÌºê·¯¸® Ãß°¡
+	//ë¼ì´ë¸ŒëŸ¬ë¦¬ : jackson-databind : jsonë°ì´í„°ë¡œ ë³€í™˜ ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€
 	@RequestMapping(value="jsonTest", method = RequestMethod.GET)
 	public String jsonTestCall() {
 		return "07_jsonTest";
@@ -168,30 +168,30 @@ public class HomeController {
 		return dto;
 	}
 	
-	//¸Ş¼Òµå Å×½ºÆ®
+	//ë©”ì†Œë“œ í…ŒìŠ¤íŠ¸
 	@RequestMapping("08_methodTest")
 	public void methodCall() {}
 	
 	@RequestMapping(value="methodTest", method = RequestMethod.GET)
 	public String methodTestGet(String name, int age) {
-		logger.info("Get¹æ½Ä");
+		logger.info("Getë°©ì‹");
 		logger.info(name + " " + age);
 		return "08_methodTest";
 	}
 
 	@RequestMapping(value="methodTest", method = RequestMethod.POST)
 	public String methodTestPost(String name, int age) {
-		logger.info("POST¹æ½Ä");
+		logger.info("POSTë°©ì‹");
 		logger.info(name + " " + age);
 		return "08_methodTest";
 	}
 	
-	//joinÆûÀ¸·Î ÀÌµ¿ :GET¹æ½Ä
+	//joiní¼ìœ¼ë¡œ ì´ë™ :GETë°©ì‹
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String joinTest() {
 		return "08_Test/join";
 	}
-	//join µ¥ÀÌÅÍ Ãâ·Â
+	//join ë°ì´í„° ì¶œë ¥
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String joinTest(MemberDTO dto) {
 		logger.info(dto.toString());

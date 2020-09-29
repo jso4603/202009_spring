@@ -2,16 +2,16 @@ package org.spring.dao;
 
 import org.spring.dto.MemberDTO;
 
-//ÀÚ½ÄÅ¬·¡½º°¡ Á¤ÀÇÇØ¾ß ÇÏ´Â ¸Ş¼Òµå¸¦ Æ÷ÇÔÇØ¾ß ÇÑ´Ù.
+//ìì‹í´ë˜ìŠ¤ê°€ ì •ì˜í•´ì•¼ í•˜ëŠ” ë©”ì†Œë“œë¥¼ í¬í•¨í•´ì•¼ í•œë‹¤.
 public interface MemberDAO{
-	// ÇÑ °Ç Á¶È¸
+	// í•œ ê±´ ì¡°íšŒ
 	public MemberDTO selectOne(String userid);
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public void insert(MemberDTO dto);
-	// È¸¿øÁ¤º¸ ¼öÁ¤
+	// íšŒì›ì •ë³´ ìˆ˜ì •
 	public void update(MemberDTO dto);
-	// È¸¿øÅ»Åğ
+	// íšŒì›íƒˆí‡´
 	public void delete(String userid);
-	// ºñ¹Ğ¹øÈ£ º¯°æ
+	// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	public void changePW(MemberDTO dto);
 }

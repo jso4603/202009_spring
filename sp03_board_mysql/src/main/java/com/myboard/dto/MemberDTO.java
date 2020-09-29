@@ -11,7 +11,7 @@ public class MemberDTO {
 	private String addr1;
 	private String addr2;
 	private String filename;
-	private int joinflag; // 0: ÀÏ¹İ, 1: ³×ÀÌ¹ö, 2: ±¸±Û, 3: Ä«Ä«¿À 
+	private int joinflag; // 0: ì¼ë°˜, 1: ë„¤ì´ë²„, 2: êµ¬ê¸€, 3: ì¹´ì¹´ì˜¤ 
 	private Date regdate;
 	
 	public MemberDTO() {

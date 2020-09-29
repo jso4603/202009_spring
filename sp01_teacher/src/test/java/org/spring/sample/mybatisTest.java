@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class mybatisTest {
-	//ÀÇÁ¸ ÁÖÀÔ
+	//ì˜ì¡´ ì£¼ì…
 	@Inject 
 	@Autowired
 	@Resource
@@ -27,9 +27,9 @@ public class mybatisTest {
 	
 	@Test
 	public void test() {
-		System.out.println("ÆÑÅä¸®:"+sf);
+		System.out.println("íŒ©í† ë¦¬:"+sf);
 		
-		System.out.println("¼¼¼Ç:" + session);
+		System.out.println("ì„¸ì…˜:" + session);
 		
 	}
 

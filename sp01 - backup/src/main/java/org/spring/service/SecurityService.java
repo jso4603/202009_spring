@@ -14,20 +14,20 @@ public class SecurityService {
 	@Resource
 	private BCryptPasswordEncoder encoder;
 	
-	// ¾ÏÈ£È­ Å×½ºÆ® 
+	// ì•”í˜¸í™” í…ŒìŠ¤íŠ¸ 
 	public void securityTestMethod(String passwd) {
 		String encodePW = encoder.encode(passwd);
 		logger.info(encodePW);
-		// ÇØ½ÃÇÔ¼ö¿¡ ÀÇÇØ¼­ 60ÀÚ¸®·Î »ı¼º µÈ´Ù.
-		logger.info("±æÀÌ : "+encodePW.length());
+		// í•´ì‹œí•¨ìˆ˜ì— ì˜í•´ì„œ 60ìë¦¬ë¡œ ìƒì„± ëœë‹¤.
+		logger.info("ê¸¸ì´ : "+encodePW.length());
 	}
 	
-	// ¾ÏÈ£ÀÏÄ¡¿©ºÎ Å×½ºÆ®
+	// ì•”í˜¸ì¼ì¹˜ì—¬ë¶€ í…ŒìŠ¤íŠ¸
 	public void pwCheckTestMethod(String passwd) {
 		String mypw = "$2a$10$xeleil2U2NGGI/K.wmONiu/FiJobGHR9nNjb0iKEK.lR3EBRfyqWm";
 		
-		// ¾ÏÈ£È­µÈ ÆĞ½º¿öµå ÀÏÄ¡ ¿©ºÎ
+		// ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œ ì¼ì¹˜ ì—¬ë¶€
 		boolean matchB = encoder.matches(passwd, mypw);
-		logger.info("ÀÏÄ¡¿©ºÎ : "+matchB);
+		logger.info("ì¼ì¹˜ì—¬ë¶€ : "+matchB);
 	}
 }
